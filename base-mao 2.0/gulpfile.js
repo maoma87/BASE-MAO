@@ -1,5 +1,8 @@
 var gulp = require('gulp');
+
 var jade = require('gulp-jade');
+var prettify = require('gulp-prettify');
+
 var sass = require('gulp-sass');
 var uncss = require('gulp-uncss');
 var autoprefixer = require('gulp-autoprefixer');
@@ -18,7 +21,8 @@ gulp.task('jade', function() {
     .pipe(jade({
       locals: YOUR_LOCALS
     }))
-    .pipe(gulp.dest('/'))
+	.pipe(prettify({indent_size: 4}))
+    .pipe(gulp.dest(''))
 });
 
 gulp.task('sass', function () {
@@ -38,6 +42,7 @@ gulp.task('sass', function () {
 gulp.task('concat', function() {
 	return gulp.src(['_includes/js/_jquery-2.2.0.min.js', '_includes/js/*.js'])
 	.pipe(concat('scripts.js'))
+	.pipe(uglify())
     .pipe(gulp.dest('js/'));
 });
 
