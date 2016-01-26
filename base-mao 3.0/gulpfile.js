@@ -73,7 +73,6 @@ gulp.task('compress', function() {
 gulp.task('connect', function() {
   connect.server({
     root: '',
-	open: {browser: 'Google Chrome'},
     livereload: true
   });
 });
