@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var connect = require('gulp-connect');
+var sourcemaps = require('gulp-sourcemaps');
 
 var jade = require('gulp-jade');
 var prettify = require('gulp-prettify');
@@ -36,6 +37,7 @@ gulp.task('jade', function() {
 gulp.task('sass', function () {
 	gulp.src('source/css/*.+(scss|sass)')
 		.pipe(plumber())
+		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(uncss({
         	html: ['public/*.html']
@@ -45,6 +47,7 @@ gulp.task('sass', function () {
 			cascade: false
 		}))
 		.pipe(cssnano())
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('public/css'));
 });
 // FIN gulp-sass + gulp-uncss + gulp-autoprefixer + gulp-cssnano
