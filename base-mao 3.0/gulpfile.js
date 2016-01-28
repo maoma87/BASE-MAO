@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
 var connect = require('gulp-connect');
 
 var jade = require('gulp-jade');
@@ -18,14 +19,15 @@ var rename = require("gulp-rename");
 
 // gulp-jade + gulp-prettify
 gulp.task('jade', function() {
-  var YOUR_LOCALS = {};
+	var YOUR_LOCALS = {};
 
-  gulp.src('source/*.jade')
-    .pipe(jade({
-      locals: YOUR_LOCALS
-    }))
-	.pipe(prettify({indent_size: 4}))
-    .pipe(gulp.dest('public'))
+	 gulp.src('source/*.jade')
+		.pipe(plumber())
+	    .pipe(jade({
+			locals: YOUR_LOCALS
+	    }))
+		.pipe(prettify({indent_size: 4}))
+	    .pipe(gulp.dest('public'))
 });
 // FIN gulp-jade + gulp-prettify
 
@@ -33,6 +35,7 @@ gulp.task('jade', function() {
 // gulp-sass + gulp-uncss + gulp-autoprefixer + gulp-cssnano
 gulp.task('sass', function () {
 	gulp.src('source/css/*.+(scss|sass)')
+		.pipe(plumber())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(uncss({
         	html: ['public/*.html']
@@ -50,9 +53,10 @@ gulp.task('sass', function () {
 // gulp-concat
 gulp.task('concat', function() {
 	return gulp.src(['source/_includes/js/_jquery-2.2.0.min.js', 'source/_includes/js/*.js'])
-	.pipe(concat('scripts.js'))
-	.pipe(uglify())
-    .pipe(gulp.dest('public/js/'));
+		.pipe(plumber())
+		.pipe(concat('scripts.js'))
+		.pipe(uglify())
+	    .pipe(gulp.dest('public/js/'));
 });
 // FIN gulp-concat
 
@@ -60,26 +64,27 @@ gulp.task('concat', function() {
 // gulp-uglify + gulp-rename
 gulp.task('compress', function() {
 	return gulp.src('source/js/functions.js')
-	.pipe(uglify())
-	/*.pipe(rename({
-      extname: '.min.js'
-	}))*/
-    .pipe(gulp.dest('public/js'));
+		.pipe(plumber())
+		.pipe(uglify())
+		/*.pipe(rename({
+	      extname: '.min.js'
+		}))*/
+	    .pipe(gulp.dest('public/js'));
 });
 // FIN gulp-uglify + gulp-rename
 
 
 // gulp-connect
 gulp.task('connect', function() {
-  connect.server({
-    root: 'public',
-    livereload: true
-  });
+	connect.server({
+		root: 'public',
+		livereload: true
+	});
 });
 
 gulp.task('html', function () {
-  gulp.src('public/*.html')
-    .pipe(connect.reload());
+	gulp.src('public/*.html')
+		.pipe(connect.reload());
 });
 // FIN gulp-connect
 
