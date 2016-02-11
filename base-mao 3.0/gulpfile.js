@@ -39,9 +39,17 @@ gulp.task('sass', function () {
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
-		.pipe(uncss({
-        	html: ['public/*.html']
-        }))
+		// .pipe(uncss({
+        // 	html: ['public/*.html']
+		// 	ignore: [
+		// 		".fade",
+		// 		".fade.in",
+		// 		".collapse",
+		// 		".collapse.in",
+		// 		".collapsing",
+		// 		/\.open/
+		// 	]
+        // }))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
 			cascade: false
