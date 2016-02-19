@@ -51,14 +51,15 @@ gulp.task('sass', function () {
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(stripCssComments({
-			preserve: false
+			//preserve: false
 		}))
 		// .pipe(autoprefixer({
 		// 	browsers: ['last 2 versions'],
 		// 	cascade: false
 		// }))
-		// .pipe(cssbeautify())
-		//.pipe(cssnano())
+
+		.pipe(cssnano())
+		.pipe(cssbeautify())
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(carpeta.public + '/css'))
 		.pipe( notify("SASS COMPILADO: <%= file.relative %>"))
