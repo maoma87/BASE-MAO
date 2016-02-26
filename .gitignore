@@ -1,5 +1,5 @@
-base-mao 3.0/node_modules/
-base-mao 3.0/public/
+node_modules/
+public/
 
 .sass-cache/
 *.css.map

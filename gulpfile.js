@@ -1,23 +1,27 @@
 var gulp = require('gulp');
+
 var plumber = require('gulp-plumber');
 var browserSync = require('browser-sync').create();
 var notify = require('gulp-notify');
-var sourcemaps = require('gulp-sourcemaps');
 
 var jade = require('gulp-jade');
+var changed = require('gulp-changed');
 var prettify = require('gulp-prettify');
 
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 var stripCssComments = require('gulp-strip-css-comments');
-var uncss = require('gulp-uncss');
 var autoprefixer = require('gulp-autoprefixer');
-var csscomb = require('gulp-csscomb');
+var uncss = require('gulp-uncss');
 var csso = require('gulp-csso');
 var cssnano = require('gulp-cssnano');
 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
+var imagemin = require('gulp-imagemin');
+
+var upmodul = require("gulp-update-modul");
 
 // VARIABLES
 
@@ -36,6 +40,9 @@ gulp.task('jade', function() {
 	gulp.src(carpeta.fuente + '/*.jade')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
+
+		//SE ENCARGA DE QUE SOLO COMPILE EL ARCHIVO QUE CAMBIO
+		.pipe(changed(carpeta.public, {extension: '.html'}))
 
 		// COMPLIA JADE
 		.pipe(jade({
@@ -152,6 +159,16 @@ gulp.task('concat', function() {
 });
 
 
+// COMPRESION DE IMAGENES
+gulp.task('img', () => {
+	return gulp.src('source/img/**/*')
+		.pipe(imagemin({
+			progressive: true
+		}))
+		.pipe(gulp.dest('public/img'));
+});
+
+
 // MONTAJE DEL SERVIDOR
 gulp.task('servidor', function() {
 	browserSync.init({
@@ -159,6 +176,16 @@ gulp.task('servidor', function() {
 		open: false,
 		notify: false
 	});
+});
+
+
+// ACTUALIZACION DE GULP MODULES
+gulp.task('update', function () {
+    gulp.src('package.json')
+	// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+	.pipe(plumber())
+
+    .pipe(upmodul('latest')); //update all modules latest version.
 });
 
 
