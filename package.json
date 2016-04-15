@@ -28,6 +28,6 @@
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-uglify": "^1.5.3",
     "gulp-uncss": "^1.0.4",
-    "gulp-update-modul": "^1.5.2"
+    "gulp-update-modul": "^1.5.5"
   }
 }

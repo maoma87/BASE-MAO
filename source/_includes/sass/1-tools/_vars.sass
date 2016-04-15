@@ -1,47 +1,77 @@
+// Breakpoints
+$medium-screen: 600px
+$large-screen: 900px
+
+
 // Colors
 
+
 // Cool
-$aqua:  #7FDBFF
-$blue:  #0074D9
-$navy:  #001F3F
-$teal:  #39CCCC
+$aqua: #7FDBFF
+$blue: #0074D9
+$navy: #001F3F
+$teal: #39CCCC
 $green: #2ECC40
 $olive: #3D9970
-$lime:  #01FF70
+$lime: #01FF70
 
 // Warm
-$yellow:  #FFDC00
-$orange:  #FF851B
-$red:     #FF4136
+$yellow: #FFDC00
+$orange: #FF851B
+$red: #FF4136
 $fuchsia: #F012BE
-$purple:  #B10DC9
-$maroon:  #85144B
+$purple: #B10DC9
+$maroon: #85144B
 
 // GrayScale
+$black: #000
+$darken-gray: lighten($black, 15%)
+$dark-gray: lighten($black, 30%)
+$gray: lighten($black, 50%)
+$light-gray: lighten($black, 70%)
+$lighten-gray: lighten($black, 85%)
 $white: #fff
-$light-gray: #CCCCCC
-$gray: #808080
-$dark-gray: #333
-$black: #111
-$blue: #1565c0
-$dark-gray: #333
-$medium-gray: #999
-$light-gray: #ddd
 
+// Validation states Colors
+$color-success: #5cb85c
+$color-info: #5bc0de
+$color-warning: #f0ad4e
+$color-danger: #d9534f
+
+// Font Colors
+$base-font-color: $dark-gray
 
 // Typography Colors
-$paragraphColor: $gray
+$paragraphColor: $dark-gray
 $headingColor: $dark-gray
+
+// Links Colors
+$action-color: $blue
+$linkColor: $action-color
+$linkHoverColor: $navy
+
+// Selection Colors
+$selectionColor: $blue
 
 // Typography
 $base-font-family: $helvetica
 $heading-font-family: $base-font-family
+$paragraph-font-family: $base-font-family
 
 // Font Sizes
-$base-font-size: 1em
+$base-font-size: 16px
+
+$h1-font-size: 3.2rem
+$h2-font-size: 2.5rem
+$h3-font-size: 1.9rem
+$h4-font-size: 1.6rem
+$h5-font-size: 1.4rem
+$h6-font-size: 1.2rem
+
+$paragraph-font-size: $base-font-size
 
 // Line height
-$base-line-height: 1.3
+$base-line-height: 1.5
 $heading-line-height: 1.2
 
 // Other Sizes
@@ -49,10 +79,6 @@ $base-border-radius: 3px
 $base-spacing: $base-line-height * 1em
 $small-spacing: $base-spacing / 2
 $base-z-index: 0
-
-// Font Colors
-$base-font-color: $dark-gray
-$action-color: $blue
 
 // Border
 $base-border-color: $light-gray
@@ -68,11 +94,4 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 
 // Animations
 $base-duration: 150ms
-$base-timing: ease
-
-// Links
-$linkColor: $action-color
-$linkHoverColor: $navy
-
-// Selection
-$selectionColor: $aqua
+$base-timing: ease-in-out

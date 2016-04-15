@@ -15,6 +15,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var uncss = require('gulp-uncss');
 var csso = require('gulp-csso');
 var cssnano = require('gulp-cssnano');
+var cssbeautify = require('gulp-cssbeautify');
 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -23,8 +24,8 @@ var imagemin = require('gulp-imagemin');
 
 var upmodul = require("gulp-update-modul");
 
-// VARIABLES
 
+// VARIABLES
 var carpeta = {
 	fuente: "source",
 	public: "public"
@@ -88,11 +89,20 @@ gulp.task('sass', function () {
 		.pipe(browserSync.stream());
 });
 
+
 // COMPILAR SASS
-gulp.task('sass-final', function () {
+gulp.task('sass-neat', function () {
 	gulp.src(carpeta.fuente + '/css/*.+(scss|sass)')
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
 		// COMPILA SASS
 		.pipe(sass().on('error', sass.logError))
+
+		// QUITA LOS COMENTARIOS DEL CSS
+		.pipe(stripCssComments({
+			preserve: false
+		}))
 
 		// AGREGA LACOMPATIBILIDAD CON TODOS LOS NAVEGADORES
 		.pipe(autoprefixer({
@@ -106,10 +116,40 @@ gulp.task('sass-final', function () {
 		// MINIFICAR EL CSS
 		.pipe(cssnano())
 
+		// ORDENADO DEL CSS
+		.pipe(cssbeautify({
+			indent: '	',
+			autosemicolon: true
+		}))
+
+		// GUARDA EL ARCHIVO CSS
+		.pipe(gulp.dest(carpeta.public + '/css'))
+
+});
+
+
+// COMPILAR SASS
+gulp.task('sass-final', function () {
+	gulp.src(carpeta.fuente + '/css/*.+(scss|sass)')
+		// COMPILA SASS
+		.pipe(sass().on('error', sass.logError))
+
 		// QUITA LOS COMENTARIOS DEL CSS
 		.pipe(stripCssComments({
 			preserve: false
 		}))
+
+		// AGREGA LACOMPATIBILIDAD CON TODOS LOS NAVEGADORES
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions'],
+			cascade: false
+		}))
+
+		// OPTIMIZACION DEL CSS
+		.pipe(csso())
+
+		// MINIFICAR EL CSS
+		.pipe(cssnano())
 
 		// GUARDA EL ARCHIVO CSS
 		.pipe(gulp.dest(carpeta.public + '/css'));
@@ -185,12 +225,16 @@ gulp.task('update', function () {
 	// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 	.pipe(plumber())
 
-    .pipe(upmodul('latest')); //update all modules latest version.
+    .pipe(upmodul('latest, true')); //update all modules latest version.
 });
 
 
 // WATCH
 gulp.task('watch', function() {
+
+	// VIGILA LAS VERSIONES DE LOS MODULOS DE GULP
+	gulp.start('update');
+
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/jade para compilar a html
 	gulp.watch(carpeta.fuente + '/_includes/jade/**/*.jade', ['jade']);
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE root para compilar a html

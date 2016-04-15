@@ -1,0 +1,95 @@
+input, select, textarea
+	margin: 0
+	display: block
+	font-family: $base-font-family
+	font-size: $base-font-size
+
+input
+	overflow: visible
+
+
+#{$all-text-inputs}, select[multiple]
+	background-color: $base-background-color
+	border: $base-border
+	border-radius: $base-border-radius
+	box-shadow: $form-box-shadow
+	box-sizing: border-box
+	margin-bottom: $small-spacing
+	padding: $base-spacing / 3
+	transition: border-color $base-duration $base-timing
+	width: 100%
+
+	&:hover
+		border-color: shade($base-border-color, 20%)
+
+	&:focus
+		border-color: $action-color
+		box-shadow: $form-box-shadow-focus
+		outline: none
+
+	&:disabled
+		background-color: shade($base-background-color, 5%)
+		cursor: not-allowed
+
+		&:hover
+			border: $base-border
+
+select
+	text-transform: none
+	margin-bottom: $small-spacing
+	max-width: 100%
+	width: auto
+
+optgroup
+	font-weight: bold
+
+fieldset
+	border: $base-border
+	background-color: transparent
+
+legend
+	box-sizing: border-box
+	color: inherit
+	display: table
+	max-width: 100%
+	padding: 0
+	white-space: normal
+	font-weight: 600
+	margin-bottom: $small-spacing / 2
+
+label
+	display: block
+	font-weight: 600
+	margin-bottom: $small-spacing / 2
+
+textarea
+	overflow: auto
+	resize: vertical
+
+[type="checkbox"], [type="radio"]
+	box-sizing: border-box
+	padding: 0
+	display: inline
+	margin-right: $small-spacing / 2
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button
+	height: auto
+
+[type="search"]
+	appearance: none
+	outline-offset: -2px
+
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration
+	-webkit-appearance: none
+
+::-webkit-input-placeholder
+	color: inherit
+	opacity: 0.54
+
+::-webkit-file-upload-button
+	-webkit-appearance: button
+	font: inherit
+
+[type="file"]
+	margin-bottom: $small-spacing
+	width: 100%
