@@ -1,27 +1,26 @@
-// Breakpoints
+// Breakpoints NEAT
 $medium-screen: 600px
 $large-screen: 900px
 
-
-// Colors
-
-
-// Cool
-$aqua: #7FDBFF
-$blue: #0074D9
-$navy: #001F3F
-$teal: #39CCCC
-$green: #2ECC40
-$olive: #3D9970
-$lime: #01FF70
-
-// Warm
-$yellow: #FFDC00
-$orange: #FF851B
-$red: #FF4136
-$fuchsia: #F012BE
-$purple: #B10DC9
-$maroon: #85144B
+// Colors matrial design by Google
+$red: #F44336
+$pink: #E91E63
+$purple: #9C27B0
+$deep-purple: #673AB7
+$indigo: #3F51B5
+$blue: #2196F3
+$light-blue: #03A9F4
+$cyan: #00BCD4
+$teal: #009688
+$green: #4CAF50
+$light-green: #8BC34A
+$lime: #CDDC39
+$yellow: #FFEB3B
+$amber: #FFC107
+$orange: #FF9800
+$deep-orange: #FF5722
+$brown: #795548
+$blue-grey: #607D8B
 
 // GrayScale
 $black: #000
@@ -33,10 +32,10 @@ $lighten-gray: lighten($black, 85%)
 $white: #fff
 
 // Validation states Colors
-$color-success: #5cb85c
-$color-info: #5bc0de
-$color-warning: #f0ad4e
-$color-danger: #d9534f
+$color-success: lighten($green, 10%)
+$color-info: lighten($light-blue, 15%)
+$color-warning: lighten($yellow, 15%)
+$color-danger: desaturate($red, 15%)
 
 // Font Colors
 $base-font-color: $dark-gray
@@ -46,15 +45,20 @@ $headingColor: $dark-gray
 // Links Colors
 $action-color: $blue
 $linkColor: $action-color
-$linkHoverColor: $navy
+$linkHoverColor: lighten($action-color, 15%)
 
 // Selection Colors
 $selectionColor: $blue
 
 // Typography
 $base-font-family: $helvetica
+$base-font-weight: 400
+
 $heading-font-family: $base-font-family
+$heading-font-weight: 700
+
 $paragraph-font-family: $base-font-family
+$paragraph-font-weight: $base-font-weight
 
 // Font Sizes
 $base-font-size: 16px

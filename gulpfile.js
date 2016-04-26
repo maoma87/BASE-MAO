@@ -1,28 +1,22 @@
-var gulp = require('gulp');
-
-var plumber = require('gulp-plumber');
-var browserSync = require('browser-sync').create();
-var notify = require('gulp-notify');
-
-var jade = require('gulp-jade');
-var changed = require('gulp-changed');
-var prettify = require('gulp-prettify');
-
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var stripCssComments = require('gulp-strip-css-comments');
-var autoprefixer = require('gulp-autoprefixer');
-var uncss = require('gulp-uncss');
-var csso = require('gulp-csso');
-var cssnano = require('gulp-cssnano');
-var cssbeautify = require('gulp-cssbeautify');
-
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-
-var imagemin = require('gulp-imagemin');
-
-var upmodul = require("gulp-update-modul");
+var gulp             = require('gulp'),
+	plumber          = require('gulp-plumber'),
+	browserSync      = require('browser-sync').create(),
+	notify           = require('gulp-notify'),
+	jade             = require('gulp-jade'),
+	changed          = require('gulp-changed'),
+	prettify         = require('gulp-prettify'),
+	sass             = require('gulp-sass'),
+	sourcemaps       = require('gulp-sourcemaps'),
+	stripCssComments = require('gulp-strip-css-comments'),
+	autoprefixer     = require('gulp-autoprefixer'),
+	uncss            = require('gulp-uncss'),
+	csso             = require('gulp-csso'),
+	cssnano          = require('gulp-cssnano'),
+	cssbeautify      = require('gulp-cssbeautify'),
+	concat           = require('gulp-concat'),
+	uglify           = require('gulp-uglify'),
+	imagemin         = require('gulp-imagemin'),
+	upmodul          = require("gulp-update-modul");
 
 
 // VARIABLES
@@ -63,6 +57,30 @@ gulp.task('jade', function() {
 		.pipe(browserSync.stream());
 });
 
+// COMPILAR JADE DE INCLUDES
+gulp.task('jade-includes', function() {
+	var YOUR_LOCALS = {};
+
+	gulp.src(carpeta.fuente + '/*.jade')
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+
+		// COMPLIA JADE
+		.pipe(jade({
+			locals: YOUR_LOCALS
+		}))
+
+		// ENBELLECE EL HTML
+		.pipe(prettify({indent_size: 4}))
+
+		// GUARDA EL ARCHIVO HTML
+		.pipe(gulp.dest(carpeta.public))
+
+		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
+		.pipe( notify("JADE COMPILADO: <%= file.relative %>"))
+
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.stream());
+});
 
 // COMPILAR SASS
 gulp.task('sass', function () {
@@ -236,7 +254,7 @@ gulp.task('watch', function() {
 	gulp.start('update');
 
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/jade para compilar a html
-	gulp.watch(carpeta.fuente + '/_includes/jade/**/*.jade', ['jade']);
+	gulp.watch(carpeta.fuente + '/_includes/jade/**/*.jade', ['jade-includes']);
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE root para compilar a html
 	gulp.watch(carpeta.fuente + '/*.jade', ['jade']);
 

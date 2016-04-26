@@ -1,13 +1,15 @@
+// UNIVERSAL
 body
 	color: $base-font-color
 	font-family: $base-font-family
 	font-size: $base-font-size
+	font-weight: $base-font-weight
 	line-height: $base-line-height
 
-
-
+// HEADERS
 h1, h2, h3, h4, h5, h6
 	font-family: $heading-font-family
+	font-weight: $heading-font-weight
 	line-height: $heading-line-height
 	margin: 0 0 $small-spacing
 
@@ -24,9 +26,11 @@ h5
 h6
 	font-size: $h6-font-size
 
+// PARAGRAPH
 p
 	font-family: $paragraph-font-family
 	font-size: $paragraph-font-size
+	font-weight: $paragraph-font-weight
 	line-height: $paragraph-line-height
 	color: $paragraphColor
 	margin: 0 0 $small-spacing
@@ -82,10 +86,9 @@ abbr[title]
 dfn
 	font-style: italic
 
-
 // encierra el texto entre comillas
-blockquote
-
+blockquote, q
+	quotes: none
 
 // se usa para encerrar citas o referencias de otras fuentes
 cite
