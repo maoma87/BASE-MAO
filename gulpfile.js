@@ -32,7 +32,7 @@ var carpeta = {
 gulp.task('jade', function() {
 	var YOUR_LOCALS = {};
 
-	gulp.src(carpeta.fuente + '/*.jade')
+	gulp.src([carpeta.fuente + '/**/*.jade', '!' + carpeta.fuente + '/_includes/jade/*.jade'])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
@@ -63,6 +63,7 @@ gulp.task('jade-includes', function() {
 
 	gulp.src(carpeta.fuente + '/*.jade')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
 
 		// COMPLIA JADE
 		.pipe(jade({
@@ -176,9 +177,12 @@ gulp.task('sass-final', function () {
 
 // COMPRIME EL ARCHIVO DE FUNCIONES PRINCIPAL
 gulp.task('compress', function() {
-	return gulp.src(carpeta.fuente + '/js/functions.js')
+	return gulp.src(carpeta.fuente + '/js/**/*.js')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
+
+
+		.pipe(changed(carpeta.public + '/js', {extension: '.js'}))
 
 		// COMPRIME EL JAVASCRIPT
 		.pipe(uglify())
@@ -256,7 +260,7 @@ gulp.task('watch', function() {
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/jade para compilar a html
 	gulp.watch(carpeta.fuente + '/_includes/jade/**/*.jade', ['jade-includes']);
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE root para compilar a html
-	gulp.watch(carpeta.fuente + '/*.jade', ['jade']);
+	gulp.watch(carpeta.fuente + '/**/*.jade', ['jade']);
 
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE _includes/sass para compilar main.sass
 	gulp.watch(carpeta.fuente + '/_includes/sass/**/*.+(scss|sass)', ['sass']);
@@ -264,7 +268,7 @@ gulp.task('watch', function() {
 	gulp.watch(carpeta.fuente + '/css/*.+(scss|sass)', ['sass']);
 
 	// Vigila los cambios en los archivos .js de los includes
-	gulp.watch(carpeta.fuente + '/js/functions.js', ['compress']);
+	gulp.watch(carpeta.fuente + '/js/**/*.js', ['compress']);
 	// Vigila los cambios en los archivos .js de los includes
 	gulp.watch(carpeta.fuente + '/_includes/js/*.js', ['concat']);
 });
