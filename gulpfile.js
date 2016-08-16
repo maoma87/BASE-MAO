@@ -1,22 +1,23 @@
-var gulp             = require('gulp'),
-	plumber          = require('gulp-plumber'),
-	browserSync      = require('browser-sync').create(),
-	notify           = require('gulp-notify'),
-	jade             = require('gulp-jade'),
-	changed          = require('gulp-changed'),
-	prettify         = require('gulp-prettify'),
-	sass             = require('gulp-sass'),
-	sourcemaps       = require('gulp-sourcemaps'),
-	stripCssComments = require('gulp-strip-css-comments'),
-	autoprefixer     = require('gulp-autoprefixer'),
-	uncss            = require('gulp-uncss'),
-	csso             = require('gulp-csso'),
-	cssnano          = require('gulp-cssnano'),
-	cssbeautify      = require('gulp-cssbeautify'),
-	concat           = require('gulp-concat'),
-	uglify           = require('gulp-uglify'),
-	imagemin         = require('gulp-imagemin'),
-	upmodul          = require("gulp-update-modul");
+var gulp				= require('gulp'),
+	plumber				= require('gulp-plumber'),
+	browserSync			= require('browser-sync').create(),
+	notify				= require('gulp-notify'),
+	jade				= require('gulp-jade'),
+	changed				= require('gulp-changed'),
+	prettify			= require('gulp-prettify'),
+	sass				= require('gulp-sass'),
+	sourcemaps			= require('gulp-sourcemaps'),
+	stripCssComments	= require('gulp-strip-css-comments'),
+	autoprefixer		= require('gulp-autoprefixer'),
+	uncss				= require('gulp-uncss'),
+	csso				= require('gulp-csso'),
+	cssnano				= require('gulp-cssnano'),
+	cssbeautify			= require('gulp-cssbeautify'),
+	concat				= require('gulp-concat'),
+	uglify				= require('gulp-uglify'),
+	typescript			= require('gulp-typescript'),
+	imagemin			= require('gulp-imagemin'),
+	upmodul				= require("gulp-update-modul");
 
 
 // VARIABLES
@@ -214,7 +215,36 @@ gulp.task('concat', function() {
 		.pipe(gulp.dest(carpeta.public + '/js/'))
 
 		// NOTIFICA QUE EL ARCHIVO SE CONCATENO
-		.pipe( notify("PLUG-INS .JS COMPRIMIDOS: <%= file.relative %>"))
+		.pipe( notify("PLUG-INS .JS CONCATENADOS: <%= file.relative %>"))
+
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.stream());
+});
+
+// PROCESAMIENTO DE TYPESCRIPT
+
+var tsProject = typescript.createProject('tsconfig.json', { sortOutput: true });
+
+gulp.task('compileTypescript', function(){
+	return gulp.src(carpeta.fuente + '/**/*.ts')
+
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
+		// TOMA LA INFORMACION PARA GENERAR EL MAPA DEL CSS
+		.pipe(sourcemaps.init())
+
+		// PROCESAMIENTO DE TYPESCRIPT
+		.pipe(typescript(tsProject))
+
+		// GENERA EL MAPA DEL CSS
+		.pipe(sourcemaps.write('.'))
+
+		// GUARDA EL ARCHIVO .JS
+		.pipe(gulp.dest(carpeta.public))
+
+		// NOTIFICA QUE EL ARCHIVO SE CONCATENO
+		.pipe( notify("TYPESCRIPT .TS PROCESADOS: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
@@ -243,11 +273,11 @@ gulp.task('servidor', function() {
 
 // ACTUALIZACION DE GULP MODULES
 gulp.task('update', function () {
-    gulp.src('package.json')
+	gulp.src('package.json')
 	// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 	.pipe(plumber())
 
-    .pipe(upmodul('latest, true')); //update all modules latest version.
+	.pipe(upmodul('latest, true')); //update all modules latest version.
 });
 
 
@@ -267,10 +297,12 @@ gulp.task('watch', function() {
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
 	gulp.watch(carpeta.fuente + '/css/*.+(scss|sass)', ['sass']);
 
-	// Vigila los cambios en los archivos .js de los includes
+	// Vigila los cambios en los archivos .js de la carpeta js
 	gulp.watch(carpeta.fuente + '/js/**/*.js', ['compress']);
 	// Vigila los cambios en los archivos .js de los includes
 	gulp.watch(carpeta.fuente + '/_includes/js/*.js', ['concat']);
+	// Vigila los cambios en los archivos .ts
+	gulp.watch(carpeta.fuente + '/**/*.ts', ['compileTypescript']);
 });
 
 // DEFAULT
