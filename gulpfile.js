@@ -3,6 +3,7 @@ var gulp				= require('gulp'),
 	browserSync			= require('browser-sync').create(),
 	notify				= require('gulp-notify'),
 	jade				= require('gulp-jade'),
+	inlineCss 			= require('gulp-inline-css'),
 	changed				= require('gulp-changed'),
 	prettify			= require('gulp-prettify'),
 	sass				= require('gulp-sass'),
@@ -84,6 +85,56 @@ gulp.task('jade-includes', function() {
 		.pipe(browserSync.stream());
 });
 
+// COMPILAR JADE EN LINEA
+gulp.task('jade-final', function() {
+	var YOUR_LOCALS = {};
+
+	gulp.src(carpeta.fuente + '/*.jade')
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
+		// COMPLIA JADE
+		.pipe(jade({
+			locals: YOUR_LOCALS
+		}))
+
+		// GUARDA EL ARCHIVO HTML
+		.pipe(gulp.dest(carpeta.public))
+
+		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
+		.pipe( notify("JADE FINAL COMPILADO: <%= file.relative %>"))
+
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.stream());
+});
+
+// COMPILAR JADE CON LOS ESTILOS EN LINEA
+gulp.task('css-inline', function() {
+	var YOUR_LOCALS = {};
+
+	gulp.src(carpeta.public + '/*.html')
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
+		// pone en linea los estilos css
+		.pipe(inlineCss({
+			applyStyleTags: true,
+			applyLinkTags: true,
+			removeStyleTags: true,
+			removeLinkTags: true
+		}))
+
+		// GUARDA EL ARCHIVO HTML
+		.pipe(gulp.dest(carpeta.public))
+
+		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
+		.pipe( notify("JADE INLINE COMPILADO: <%= file.relative %>"))
+
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.stream());
+});
+
+
 // COMPILAR SASS
 gulp.task('sass', function () {
 	gulp.src(carpeta.fuente + '/css/*.+(scss|sass)')
@@ -110,43 +161,6 @@ gulp.task('sass', function () {
 });
 
 
-// COMPILAR SASS
-gulp.task('sass-neat', function () {
-	gulp.src(carpeta.fuente + '/css/*.+(scss|sass)')
-		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
-		.pipe(plumber())
-
-		// COMPILA SASS
-		.pipe(sass().on('error', sass.logError))
-
-		// QUITA LOS COMENTARIOS DEL CSS
-		.pipe(stripCssComments({
-			preserve: false
-		}))
-
-		// AGREGA LACOMPATIBILIDAD CON TODOS LOS NAVEGADORES
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: false
-		}))
-
-		// OPTIMIZACION DEL CSS
-		.pipe(csso())
-
-		// MINIFICAR EL CSS
-		.pipe(cssnano())
-
-		// ORDENADO DEL CSS
-		.pipe(cssbeautify({
-			indent: '	',
-			autosemicolon: true
-		}))
-
-		// GUARDA EL ARCHIVO CSS
-		.pipe(gulp.dest(carpeta.public + '/css'))
-
-});
-
 
 // COMPILAR SASS
 gulp.task('sass-final', function () {
@@ -170,6 +184,12 @@ gulp.task('sass-final', function () {
 
 		// MINIFICAR EL CSS
 		.pipe(cssnano())
+
+		// ORDENADO DEL CSS
+		// .pipe(cssbeautify({
+		// 	indent: '	',
+		// 	autosemicolon: true
+		// }))
 
 		// GUARDA EL ARCHIVO CSS
 		.pipe(gulp.dest(carpeta.public + '/css'));
