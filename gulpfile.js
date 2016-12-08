@@ -17,8 +17,7 @@ var gulp				= require('gulp'),
 	concat				= require('gulp-concat'),
 	uglify				= require('gulp-uglify'),
 	typescript			= require('gulp-typescript'),
-	imagemin			= require('gulp-imagemin'),
-	upmodul				= require("gulp-update-modul");
+	imagemin			= require('gulp-imagemin');
 
 
 // VARIABLES
@@ -291,21 +290,8 @@ gulp.task('servidor', function() {
 });
 
 
-// ACTUALIZACION DE GULP MODULES
-gulp.task('update', function () {
-	gulp.src('package.json')
-	// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
-	.pipe(plumber())
-
-	.pipe(upmodul('latest, true')); //update all modules latest version.
-});
-
-
 // WATCH
 gulp.task('watch', function() {
-
-	// VIGILA LAS VERSIONES DE LOS MODULOS DE GULP
-	gulp.start('update');
 
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/jade para compilar a html
 	gulp.watch(carpeta.fuente + '/_includes/jade/**/*.jade', ['jade-includes']);
