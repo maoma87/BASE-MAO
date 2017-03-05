@@ -16,7 +16,6 @@ var gulp				= require('gulp'),
 	cssbeautify			= require('gulp-cssbeautify'),
 	concat				= require('gulp-concat'),
 	uglify				= require('gulp-uglify'),
-	typescript			= require('gulp-typescript'),
 	imagemin			= require('gulp-imagemin');
 
 
@@ -198,9 +197,9 @@ gulp.task('sass-final', function () {
 // COMPRIME EL ARCHIVO DE FUNCIONES PRINCIPAL
 gulp.task('compress', function() {
 	return gulp.src(carpeta.fuente + '/js/**/*.js')
+
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
-
 
 		.pipe(changed(carpeta.public + '/js', {extension: '.js'}))
 
@@ -240,36 +239,6 @@ gulp.task('concat', function() {
 		.pipe(browserSync.stream());
 });
 
-// PROCESAMIENTO DE TYPESCRIPT
-
-var tsProject = typescript.createProject('tsconfig.json', { sortOutput: true });
-
-gulp.task('compileTypescript', function(){
-	return gulp.src(carpeta.fuente + '/**/*.ts')
-
-		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
-		.pipe(plumber())
-
-		// TOMA LA INFORMACION PARA GENERAR EL MAPA DEL CSS
-		.pipe(sourcemaps.init())
-
-		// PROCESAMIENTO DE TYPESCRIPT
-		.pipe(typescript(tsProject))
-
-		// GENERA EL MAPA DEL CSS
-		.pipe(sourcemaps.write('.'))
-
-		// GUARDA EL ARCHIVO .JS
-		.pipe(gulp.dest(carpeta.public))
-
-		// NOTIFICA QUE EL ARCHIVO SE CONCATENO
-		.pipe( notify("TYPESCRIPT .TS PROCESADOS: <%= file.relative %>"))
-
-		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
-});
-
-
 // COMPRESION DE IMAGENES
 gulp.task('img', () => {
 	return gulp.src('source/img/**/*')
@@ -307,8 +276,6 @@ gulp.task('watch', function() {
 	gulp.watch(carpeta.fuente + '/js/**/*.js', ['compress']);
 	// Vigila los cambios en los archivos .js de los includes
 	gulp.watch(carpeta.fuente + '/_includes/js/*.js', ['concat']);
-	// Vigila los cambios en los archivos .ts
-	gulp.watch(carpeta.fuente + '/**/*.ts', ['compileTypescript']);
 });
 
 // DEFAULT
