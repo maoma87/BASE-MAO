@@ -33,7 +33,7 @@ var carpeta = {
 
 	css: {
 		src		: src	+ '/css/*.+(scss|sass)',
-		inc		: src	+ '/_includes/css/**/*.sass',
+		inc		: src	+ '/_includes/css/**/*.+(scss|sass)',
 		pub		: pub	+ '/css'
 	},
 
