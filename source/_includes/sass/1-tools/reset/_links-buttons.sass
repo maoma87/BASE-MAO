@@ -1,10 +1,11 @@
 a
-	background-color: transparent
-	-webkit-text-decoration-skip: objects
+	font-family: $link-font-family
+	font-size: $link-font-size
+	font-weight: $link-font-weight
 	text-decoration: none
 	color: $action-color
-	text-decoration: none
-	transition: color $base-duration $base-timing
+	background-color: transparent
+	transition: all $base-duration $base-timing
 
 	&:hover
 		color: $linkHoverColor
@@ -15,41 +16,28 @@ a
 	&:active, &:focus, &:hover
 		color: shade($action-color, 25%)
 
-button, html[type="button"], [type="reset"], [type="submit"]
-	-webkit-appearance: button
-
-button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner
-	border-style: none
-	padding: 0
-
-button:-moz-focusring, [type="button"]:-moz-focusring, [type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring
-	outline: 1px dotted ButtonText
-
-button
-	font: inherit
-	margin: 0
-	overflow: visible
-	text-transform: none
-
 #{$all-buttons}
 	appearance: none
-	background-color: $action-color
-	border: 0
-	border-radius: $base-border-radius
-	color: #fff
 	cursor: pointer
 	display: inline-block
-	font-family: $base-font-family
-	font-size: $base-font-size
-	-webkit-font-smoothing: antialiased
-	font-weight: 600
-	line-height: 1
-	padding: $small-spacing $base-spacing
-	text-decoration: none
-	transition: background-color $base-duration $base-timing
-	user-select: none
 	vertical-align: middle
+	border: 0
+	border-radius: $base-border-radius
+	color: $white
+	background-color: $action-color
+	font-family: $link-font-family
+	font-weight: $link-font-weight
+	font-size: $link-font-size
+	-webkit-font-smoothing: antialiased
+	line-height: 1em
 	white-space: nowrap
+	text-decoration: none
+	text-transform: none
+	padding: $small-spacing $base-spacing
+	margin: 0
+	user-select: none
+	overflow: visible
+	transition: background-color $base-duration $base-timing
 
 	&:hover, &:focus
 		background-color: shade($action-color, 20%)
@@ -61,3 +49,11 @@ button
 
 		&:hover
 			background-color: $action-color
+
+
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner
+	border-style: none
+	padding: 0
+
+button:-moz-focusring, [type="button"]:-moz-focusring, [type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring
+	outline: 1px dotted ButtonText
