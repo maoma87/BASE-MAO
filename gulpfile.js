@@ -14,6 +14,7 @@ var gulp				= require('gulp'),
 	csso				= require('gulp-csso'),
 	cssnano				= require('gulp-cssnano'),
 	cssbeautify			= require('gulp-cssbeautify'),
+	cachebust			= require('gulp-cache-bust'),
 	concat				= require('gulp-concat'),
 	uglify				= require('gulp-uglify'),
 	imagemin			= require('gulp-imagemin');
@@ -71,6 +72,7 @@ gulp.task('jade', function() {
 		// ENBELLECE EL HTML
 		.pipe(prettify({indent_size: 4}))
 
+		.pipe(cachebust())
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.jade.pub))
 
@@ -129,6 +131,16 @@ gulp.task('jade-final', function() {
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
 });
+
+// CACHE BUST
+gulp.task('cache-bust',function(){
+
+	gulp.src(carpeta.jade.pub + '**/*.html')
+		.pipe(cachebust())
+		.pipe(gulp.dest(carpeta.jade.pub));
+});
+
+
 
 // COMPILAR JADE CON LOS ESTILOS EN LINEA
 gulp.task('css-inline', function() {
