@@ -72,7 +72,6 @@ gulp.task('jade', function() {
 		// ENBELLECE EL HTML
 		.pipe(prettify({indent_size: 4}))
 
-		.pipe(cachebust())
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.jade.pub))
 
@@ -136,8 +135,15 @@ gulp.task('jade-final', function() {
 gulp.task('cache-bust',function(){
 
 	gulp.src(carpeta.jade.pub + '**/*.html')
-		.pipe(cachebust())
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
+		.pipe(cachebust({
+			type: 'timestamp'
+		}))
+
 		.pipe(gulp.dest(carpeta.jade.pub));
+
 });
 
 
