@@ -17,37 +17,47 @@ var gulp				= require('gulp'),
 	cachebust			= require('gulp-cache-bust'),
 	concat				= require('gulp-concat'),
 	uglify				= require('gulp-uglify'),
+	typescript			= require('gulp-typescript'),
 	imagemin			= require('gulp-imagemin');
 
 
-var src  = 'source',  // -> Desarrollo
-	pub = 'public'; // -> Producción
+var tsProject = typescript.createProject('tsconfig.json');
+
+
+var src		= './source', // -> Desarrollo
+	pub		= './public'; // -> Producción
 
 // VARIABLES
 var carpeta = {
 
 	jade:{
-		src		: src	+ '/*.jade',
-		inc		: src	+ '/_includes/jade/**/*.jade',
-		pub		: pub	+ '/'
+		src		: src + '/*.jade',
+		inc		: src + '/_includes/jade/**/*.jade',
+		pub		: pub + '/'
 	},
 
 	css: {
-		src		: src	+ '/css/*.{scss,sass}',
-		inc		: src	+ '/_includes/sass/**/*.{scss,sass}',
-		pub		: pub	+ '/css'
+		src		: src + '/css/*.{scss,sass}',
+		inc		: src + '/_includes/sass/**/*.{scss,sass}',
+		pub		: pub + '/css'
 	},
 
 	js: {
-		src		: src	+ '/js/*.js',
-		inc		: src	+ '/_includes/js/**/*.js',
-		pub		: pub	+ '/assets/js'
+		src		: src + '/js/*.js',
+		inc		: src + '/_includes/js/**/*.js',
+		pub		: pub + '/js'
+	},
+
+	ts: {
+		src		: src + '/app/**/*.ts',
+		inc		: src + '/app/**/*.ts',
+		pub		: pub + '/js/app'
 	},
 
 	img: {
-		all		: src	+ '/img/**/*.{jpg,jpeg,png,gif,svg,JPG,JPEG}',
-		pub		: pub	+ '/img'
-	},
+		all		: src + '/img/**/*.{jpg,jpeg,png,gif,svg,JPG,JPEG}',
+		pub		: pub + '/img'
+	}
 };
 
 
@@ -79,7 +89,9 @@ gulp.task('jade', function() {
 		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 // COMPILAR JADE DE INCLUDES
@@ -105,7 +117,9 @@ gulp.task('jade-includes', function() {
 		.pipe( notify("JADE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 // COMPILAR JADE EN LINEA
@@ -128,7 +142,9 @@ gulp.task('jade-final', function() {
 		.pipe( notify("JADE FINAL COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 // CACHE BUST
@@ -171,7 +187,9 @@ gulp.task('css-inline', function() {
 		.pipe( notify("JADE INLINE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 
@@ -197,7 +215,9 @@ gulp.task('sass', function () {
 		.pipe( notify("SASS COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 // COMPILAR SASS EN LINEA
@@ -253,7 +273,9 @@ gulp.task('compress', function() {
 		.pipe( notify("FUNCIONES .JS COMPRIMIDO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 // CONCATENA Y COMPRIME LOS ARCHIVOS JS EN LA CARPETA JS DE INCLUDES
@@ -275,9 +297,34 @@ gulp.task('concat', function() {
 		.pipe( notify("PLUG-INS .JS CONCATENADOS: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
+// COMPILAR TYPESCRIPT
+gulp.task('typescript', function() {
+	return gulp.src(carpeta.ts.src)
+		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
+		.pipe(plumber())
+
+		// PROCESA EL TYPESCRIPT
+		.pipe(tsProject())
+
+		// COMPRIME EL JAVASCRIPT
+		.pipe(uglify())
+
+		// GUARDA EL ARCHIVO SCRIPTS.JS
+		.pipe(gulp.dest(carpeta.ts.pub))
+		//
+		// NOTIFICA QUE EL ARCHIVO SE CONCATENO
+		.pipe( notify("TYPESCRIPT COMPILADO: <%= file.relative %>"))
+		//
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.reload({
+			stream: true
+		}));
+});
 
 // COMPRESION DE IMAGENES
 gulp.task('img', () => {
@@ -315,7 +362,9 @@ gulp.task('watch', function() {
 	// Vigila los cambios en los archivos .js de la carpeta js
 	gulp.watch(carpeta.js.src , ['compress']);
 	// Vigila los cambios en los archivos .js de los includes
-	gulp.watch(carpeta.js.inc , ['concat']);
+	// gulp.watch(carpeta.js.inc , ['concat']);
+	// Vigila los cambios en los archivos .ts de la carpeta app
+	gulp.watch(carpeta.ts.src , ['typescript']);
 });
 
 // DEFAULT
