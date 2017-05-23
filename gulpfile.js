@@ -2,7 +2,7 @@ var gulp				= require('gulp'),
 	plumber				= require('gulp-plumber'),
 	browserSync			= require('browser-sync').create(),
 	notify				= require('gulp-notify'),
-	jade				= require('gulp-jade'),
+	pug					= require('gulp-pug'),
 	inlineCss 			= require('gulp-inline-css'),
 	changed				= require('gulp-changed'),
 	prettify			= require('gulp-prettify'),
@@ -30,9 +30,9 @@ var src		= './source', // -> Desarrollo
 // VARIABLES
 var carpeta = {
 
-	jade:{
-		src		: src + '/*.jade',
-		inc		: src + '/_includes/jade/**/*.jade',
+	pug:{
+		src		: src + '/*.pug',
+		inc		: src + '/_includes/pug/**/*.pug',
 		pub		: pub + '/'
 	},
 
@@ -64,18 +64,18 @@ var carpeta = {
 // TASKS ------------------------------------------------------------------
 
 // COMPILAR JADE
-gulp.task('jade', function() {
+gulp.task('01-PUG', function() {
 	var YOUR_LOCALS = {};
 
-	gulp.src([carpeta.jade.src , '!' + carpeta.jade.inc])
+	gulp.src([carpeta.pug.src , '!' + carpeta.pug.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
 		//SE ENCARGA DE QUE SOLO COMPILE EL ARCHIVO QUE CAMBIO
-		.pipe(changed(carpeta.jade.pub, {extension: '.html'}))
+		.pipe(changed(carpeta.pug.pub, {extension: '.html'}))
 
 		// COMPLIA JADE
-		.pipe(jade({
+		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
 
@@ -83,7 +83,7 @@ gulp.task('jade', function() {
 		.pipe(prettify({indent_size: 4}))
 
 		// GUARDA EL ARCHIVO HTML
-		.pipe(gulp.dest(carpeta.jade.pub))
+		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
 		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
@@ -95,15 +95,15 @@ gulp.task('jade', function() {
 });
 
 // COMPILAR JADE DE INCLUDES
-gulp.task('jade-includes', function() {
+gulp.task('02-PUG-includes', function() {
 	var YOUR_LOCALS = {};
 
-	gulp.src(carpeta.jade.src)
+	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
 		// COMPLIA JADE
-		.pipe(jade({
+		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
 
@@ -111,7 +111,7 @@ gulp.task('jade-includes', function() {
 		.pipe(prettify({indent_size: 4}))
 
 		// GUARDA EL ARCHIVO HTML
-		.pipe(gulp.dest(carpeta.jade.pub))
+		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
 		.pipe( notify("JADE COMPILADO: <%= file.relative %>"))
@@ -123,20 +123,20 @@ gulp.task('jade-includes', function() {
 });
 
 // COMPILAR JADE EN LINEA
-gulp.task('jade-final', function() {
+gulp.task('03-PUG-final', function() {
 	var YOUR_LOCALS = {};
 
-	gulp.src(carpeta.jade.src)
+	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
 		// COMPLIA JADE
-		.pipe(jade({
+		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
 
 		// GUARDA EL ARCHIVO HTML
-		.pipe(gulp.dest(carpeta.jade.pub))
+		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
 		.pipe( notify("JADE FINAL COMPILADO: <%= file.relative %>"))
@@ -150,7 +150,7 @@ gulp.task('jade-final', function() {
 // CACHE BUST
 gulp.task('cache-bust',function(){
 
-	gulp.src(carpeta.jade.pub + '**/*.html')
+	gulp.src(carpeta.pug.pub + '**/*.html')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
@@ -158,17 +158,17 @@ gulp.task('cache-bust',function(){
 			type: 'timestamp'
 		}))
 
-		.pipe(gulp.dest(carpeta.jade.pub));
+		.pipe(gulp.dest(carpeta.pug.pub));
 
 });
 
 
 
 // COMPILAR JADE CON LOS ESTILOS EN LINEA
-gulp.task('css-inline', function() {
+gulp.task('04-CSS-inline', function() {
 	var YOUR_LOCALS = {};
 
-	gulp.src(carpeta.jade.pub + '/*.html')
+	gulp.src(carpeta.pug.pub + '/*.html')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
@@ -181,7 +181,7 @@ gulp.task('css-inline', function() {
 		}))
 
 		// GUARDA EL ARCHIVO HTML
-		.pipe(gulp.dest(carpeta.jade.pub))
+		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
 		.pipe( notify("JADE INLINE COMPILADO: <%= file.relative %>"))
@@ -194,7 +194,7 @@ gulp.task('css-inline', function() {
 
 
 // COMPILAR SASS
-gulp.task('sass', function () {
+gulp.task('05-SASS', function () {
 	gulp.src(carpeta.css.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
@@ -221,7 +221,7 @@ gulp.task('sass', function () {
 });
 
 // COMPILAR SASS EN LINEA
-gulp.task('sass-final', function () {
+gulp.task('06-SASS-final', function () {
 	gulp.src(carpeta.css.src)
 		// COMPILA SASS
 		.pipe(sass().on('error', sass.logError))
@@ -349,15 +349,15 @@ gulp.task('servidor', function() {
 // WATCH
 gulp.task('watch', function() {
 
-	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/jade para compilar a html
-	gulp.watch(carpeta.jade.inc , ['jade-includes']);
+	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/pug para compilar a html
+	gulp.watch(carpeta.pug.inc , ['02-PUG-includes']);
 	// VIGILA LOS ARCHIVOS JADE DENTRO DE root para compilar a html
-	gulp.watch(carpeta.jade.src , ['jade']);
+	gulp.watch(carpeta.pug.src , ['01-PUG']);
 
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE _includes/sass para compilar main.sass
-	gulp.watch(carpeta.css.inc , ['sass']);
+	gulp.watch(carpeta.css.inc , ['05-SASS']);
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
-	gulp.watch(carpeta.css.src , ['sass']);
+	gulp.watch(carpeta.css.src , ['05-SASS']);
 
 	// Vigila los cambios en los archivos .js de la carpeta js
 	gulp.watch(carpeta.js.src , ['compress']);
@@ -368,4 +368,4 @@ gulp.task('watch', function() {
 });
 
 // DEFAULT
-gulp.task('default', ['servidor', 'watch']);
+gulp.task('00-DEVELOP', ['servidor', 'watch']);

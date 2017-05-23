@@ -1,15 +1,15 @@
 doctype html
-html(lang='es') 
+html(lang='es')
 
-	include _includes/jade/_head.jade
+	include _includes/pug/_head.pug
 
 	body
 
-		include _includes/jade/_header.jade
+		include _includes/pug/_header.pug
 
 
 		section(style="padding:5%")
-			
+
 			h1 Headings
 			h1 h1. Heading
 			h2 h2. Heading
@@ -17,9 +17,9 @@ html(lang='es')
 			h4 h4. Heading
 			h5 h5. Heading
 			h6 h6. Heading
-			
+
 			hr
-				
+
 			h1 Paragraph
 			p Lorem ipsum dolor sit amet,| adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.
 				br
@@ -27,11 +27,11 @@ html(lang='es')
 				br
 				strong strong text - commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.
 				br
-				u u element - suscipit duim donec sed tellus eget	
+				u u element - suscipit duim donec sed tellus eget
 				br
 				s strikethrough text - suscipit duim donec sed tellus eget
 				br
-				em emphasis text - suscipit duim donec sed tellus eget / 
+				em emphasis text - suscipit duim donec sed tellus eget /
 				i emphasis text - suscipit duim donec sed tellus eget
 				br
 				|texto control
@@ -42,50 +42,50 @@ html(lang='es')
 				br
 				small small text - suscipit duim donec sed tellus eget
 				br
-				a(href='#', title='test link') test link 
+				a(href='#', title='test link') test link
 				br
-				pre Texto "codigo" - Donec faucibus. 
+				pre Texto "codigo" - Donec faucibus.
 					|Donec sed tellus eget sapien
 					|Suspendisse quam sem
-			
+
 			hr
-			
+
 			h1 List Types
-			
+
 			h3 Definition List
 			dl
 				dt Definition List Title
 				dd This is a definition list division.
 				dd This is a definition list division.
-			
+
 			h3 Ordered List
 			ol
 				li List Item 1
 				li List Item 2
 				li List Item 3
-			
+
 			h3 Unordered List
 			ul
 				li List Item 1
 				li List Item 2
 				li List Item 3
-			
-			
+
+
 			hr
-				
+
 			h1 Fieldsets and Form Elements
 			fieldset
 				p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus.
 				form(lpformnum='1')
 					h2 Form Element
 					p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui.
-					
+
 						label(for='text_field') Text Field:
 						input(type='text')
-					
+
 						label(for='text_area') Text Area:
 						textarea
-					
+
 						label(for='select_element') Select Element:
 						select(name='select_element')
 							optgroup(label='Option Group 1')
@@ -96,7 +96,7 @@ html(lang='es')
 								option(value='1') Option 1
 								option(value='2') Option 2
 								option(value='3') Option 3
-					
+
 						label(for='radio_buttons') Radio Buttons:
 						label
 							input.radio(type='radio', name='radio_button', value='radio_1')
@@ -107,7 +107,7 @@ html(lang='es')
 						label
 							input.radio(type='radio', name='radio_button', value='radio_3')
 							|  Radio 3
-					
+
 						label(for='checkboxes') Checkboxes:
 						label
 							input.checkbox(type='checkbox', name='checkboxes', value='check_1')
@@ -118,13 +118,13 @@ html(lang='es')
 						label
 							input.checkbox(type='checkbox', name='checkboxes', value='check_3')
 							|  Checkbox 3
-					
+
 						label(for='password') Password:
 						input.password(type='password', name='password', autocomplete='off')
-					
+
 						label(for='file') File Input:
 						input.file(type='file', name='file')
-					
+
 						input(type='submit', value='Submit')
 			hr
 			h1 Tables
@@ -146,15 +146,15 @@ html(lang='es')
 						td Division 1
 						td Division 2
 						td Division 3
-						
-						
+
+
 			hr
 			h1 Estates
 				form(lpformnum='2')
 					.info-state-bg
 						label(for="text_field-success") State-Info
 						p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-						
+
 					.success-state-bg
 						label(for="text_field-success") State-Success:
 						label(for="checkboxes")
@@ -172,7 +172,7 @@ html(lang='es')
 						p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 						input(type="text")
 						textarea
-							
+
 					.danger-state-bg
 						label(for="text_field-danger") State-Danger:
 						label(for="checkboxes")
@@ -181,7 +181,7 @@ html(lang='es')
 						p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 						input(type="text")
 						textarea
-					
-		include _includes/jade/_footer.jade
 
-		include _includes/jade/_scripts.jade
+		include _includes/pug/_footer.pug
+
+		include _includes/pug/_scripts.pug
