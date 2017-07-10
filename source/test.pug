@@ -1,0 +1,550 @@
+doctype html
+html(lang='es')
+
+	include _includes/pug/_head.pug
+
+	body
+
+		include _includes/pug/_header.pug
+		nav(style="position:fixed;width:15%;padding:15px;")
+			ul
+				li
+					a(href='#text') Text
+					ul(style="margin-left:15px;")
+						li
+							a(href='#text__headings') Headings
+						li
+							a(href='#text__paragraphs') Paragraphs
+						li
+							a(href='#text__blockquotes') Blockquotes
+						li
+							a(href='#text__lists') Lists
+						li
+							a(href='#text__tables') Tables
+						li
+							a(href='#text__code') Code
+						li
+							a(href='#text__inline') Inline elements
+				li
+					a(href='#embedded') Embedded content
+					ul(style="margin-left:15px;")
+						li
+							a(href='#embedded__images') Images
+						li
+							a(href='#embedded__audio') Audio
+						li
+							a(href='#embedded__video') Video
+						li
+							a(href='#embedded__canvas') Canvas
+						li
+							a(href='#embedded__meter') Meter
+						li
+							a(href='#embedded__progress') Progress
+						li
+							a(href='#embedded__svg') Inline SVG
+						li
+							a(href='#embedded__iframe') IFrames
+				li
+					a(href='#forms') Form elements
+					ul(style="margin-left:15px;")
+						li
+							a(href='#forms__input') Input fields
+						li
+							a(href='#forms__select') Select menus
+						li
+							a(href='#forms__checkbox') Checkboxes
+						li
+							a(href='#forms__radio') Radio buttons
+						li
+							a(href='#forms__textareas') Textareas
+						li
+							a(href='#forms__file') File upload
+						li
+							a(href='#forms__html5') HTML5 inputs
+						li
+							a(href='#forms__action') Action buttons
+				li
+					a(href='#states') States
+
+		main(style="width:85%;padding:5%;margin-left:15%")
+			section#text
+				article#text__headings
+					header
+						h2 Headings
+					div
+						h1 This is 1st level heading
+						p This is a test paragraph.
+						h2 This is 2nd level heading
+						p This is a test paragraph.
+						h3 This is 3rd level heading
+						p This is a test paragraph.
+						h4 This is 4th level heading
+						p This is a test paragraph.
+						h5 This is 5th level heading
+						p This is a test paragraph.
+						h6 This is 6th level heading
+						p This is a test paragraph.
+			
+				hr
+				article#text__paragraphs
+					header
+						h2 Paragraphs
+					div
+						p This is a normal paragraph (<code>p</code> element). To add some length to it, let us mention that this page was primarily written for testing the effect of <strong> user style sheets</strong>. You can use it for various other purposes as well, like just checking how your browser displays various HTML elements by default. It can also be useful when testing conversions from HTML format to other formats, since some elements can go wrong then.
+						p This is another paragraph. I think it needs to be added that the set of elements tested is not exhaustive in any sense. I have selected those elements for which it can make sense to write user style sheet rules, in my opionion.
+				
+				hr
+				article#text__blockquotes
+					header
+						h2 Blockquotes
+					div
+						blockquote
+							p This is a block quotation containing a single paragraph. Well, not quite, since this is not <em>really</em> quoted text, but I hope you understand the point. After all, this page does not use HTML markup very normally anyway.
+							
+							p It is typically distinguished visually using indentation and a different typeface or smaller size quotation. It may or may not include a citation, usually placed at the bottom.
+			
+				hr
+				article#text__lists
+					header
+						h2 Lists
+					
+					div
+						h5 Unordered List
+						p This is a paragraph before an <strong>unnumbered</strong> list (<code>ul</code>). Note that the spacing between a paragraph and a list before or after that is hard to tune in a user style sheet. You can't guess which paragraphs are logically related to a list, e.g. as a "list header".
+						ul
+							li List Item 1
+							li List Item 2
+							li List Item 3 - Well, probably this list item should be longer. Note that for short items lists look better if they are compactly presented, whereas for long items, it would be better to have more vertical spacing between items.
+							li List Item 4 - This is the last item in this list. Let us terminate the list now without making any more fuss about it.
+						
+						br
+						h5 Menu list
+						p The following is a <code>menu</code> list:
+						menu
+							li List Item 1
+							li List Item 2
+							li List Item 3 - Well, probably this list item should be longer. Note that for short items lists look better if they are compactly presented, whereas for long items, it would be better to have more vertical spacing between items.
+						
+						br
+						h5 Dir list
+						p The following is a <code>dir</code> list:
+						dir
+							li List Item 1
+							li List Item 2
+							li List Item 3 - Well, probably this list item should be longer. Note that for short items lists look better if they are compactly presented, whereas for long items, it would be better to have more vertical spacing between items.
+						
+						br
+						h5 	Ordered List
+						p This is a paragraph before a <strong>numbered</strong> list (<code>ol</code>). Note that the spacing between a paragraph and a list before or after that is hard to tune in a user style sheet. You can't guess which paragraphs are logically related to a list, e.g. as a "list header".
+						
+						ol
+							li List Item 1
+							li List Item 2
+							li List Item 3 - Well, probably this list item should be longer. Note that for short items lists look better if they are compactly presented, whereas for long items, it would be better to have more vertical spacing between items.
+							li List Item 4 - This is the last item in this list. Let us terminate the list now without making any more fuss about it.
+							
+						br
+						h5 Definition list
+						p This is a paragraph before a <strong>definition</strong> list (<code>dl</code>). In principle, such a list should consist of <em>terms</em> and associated definitions. But many authors use <code>dl</code> elements for fancy "layout" things. Usually the effect is not<em>too</em> bad, if you design user style sheet rules for <code>dl</code> which are suitable for real definition lists.
+						dl
+							dt recursion
+								dd see recursion
+							dt recursion, indirect
+								dd see indirect recursion
+							dt indirect recursion
+								dd see recursion, indirect
+							dt term
+								dd a word or other expression taken into specific use in a well-defined meaning, which is often defined rather rigorously, even formally, and may differ quite a lot from an everyday meaning
+				hr
+				article#text__tables
+					header
+						h2 Tables
+					
+					div
+						table
+							caption Table Caption
+							thead
+								tr
+									th Table Heading 1
+									th Table Heading 2
+									th Table Heading 3
+									th Table Heading 4
+									th Table Heading 5
+							tfoot
+								tr
+									th Table Footer 1
+									th Table Footer 2
+									th Table Footer 3
+									th Table Footer 4
+									th Table Footer 5
+							tbody
+								tr
+									td Table Cell 1
+									td Table Cell 2
+									td Table Cell 3
+									td Table Cell 4
+									td Table Cell 5
+								tr
+									td Table Cell 1
+									td Table Cell 2
+									td Table Cell 3
+									td Table Cell 4
+									td Table Cell 5
+								tr
+									td Table Cell 1
+									td Table Cell 2
+									td Table Cell 3
+									td Table Cell 4
+									td Table Cell 5
+								tr
+									td Table Cell 1
+									td Table Cell 2
+									td Table Cell 3
+									td Table Cell 4
+									td Table Cell 5
+				
+				br
+				hr
+				article#text__code
+					header
+						h2 Code
+					div
+						p
+							strong Inline code:
+							code This is sample text inside code markup
+						p
+							strong Keyboard input:
+							kbd This is sample text inside kbd markup
+						p
+							strong Sample output:
+							samp This is sample text inside samp markup
+						p
+							strong Pre-formatted text
+							pre.
+								P R E F O R M A T T E D T E X T
+								! " # $ % & ' ( ) * + , - . /
+								0 1 2 3 4 5 6 7 8 9 : ; < = > ?
+								@ A B C D E F G H I J K L M N O
+								P Q R S T U V W X Y Z [ \ ] ^ _
+								` a b c d e f g h i j k l m n o
+								p q r s t u v w x y z { | } ~
+				
+				
+				hr
+				article#text__inline
+					header
+						h2 Inline elements
+					div
+						p
+							a(href='#!') This is a text link
+						p
+							strong Strong is used to indicate strong importance.
+						p
+							em This text has added emphasis.
+						p
+							b b element
+							|  is stylistically different text from normal text, without any special importance.
+						p
+							i i element
+							|  is text that is offset from the normal text.
+						p
+							u u element
+							|  is text with an unarticulated, though explicitly rendered, non-textual annotation.
+						p
+							del This text is deleted
+							|  and 
+							ins This text is inserted
+						p
+							s This text has a strikethrough
+						p
+							| Superscript
+							sup ®
+						p
+							| Subscript for things like H
+							sub 2
+							| O.
+						p
+							small This small text is small for for fine print, etc.
+						p
+							| Abbreviation: 
+							abbr(title='HyperText Markup Language') HTML
+						p
+							q(cite='https://developer.mozilla.org/en-US/docs/HTML/Element/q') This text is a short inline quotation.
+						p
+							cite This is a citation.
+						p
+							dfn dfn element
+							|  indicates a definition.
+						p
+							mark mark element
+							|  indicates a highlight.
+						p
+							var variable element
+							| , such as 
+							var x
+							|  = 
+							var y
+						p
+							| The time element: 
+							time(datetime='2013-04-06T12:32+00:00') 2 weeks ago
+						
+						
+						
+						
+						
+						
+			hr
+						
+			section#embedded
+				header
+					h1 Embedded content
+				br
+				article#embedded__images
+					header
+						h2 Images
+					div
+						p no <code>figure</code> element
+						img(src='http://placekitten.com/420/420', alt='Image alt text')
+					br
+					div
+						p Wrapped in a <code>figure</code> element with a <code>figcaption</code> 
+						figure
+							img(src='http://placekitten.com/420/420', alt='Image alt text')
+							figcaption Here is a caption for this image.
+							
+				br
+				article#embedded__audio
+					header
+						h2 Audio
+					div
+						audio(controls='') audio
+							source(src='https://www.w3schools.com/html/horse.ogg', type='audio/ogg')
+							source(src='https://www.w3schools.com/html/horse.mp3', type='audio/mpeg')
+						
+				br
+				article#embedded__video
+					header
+						h2 Video
+					div
+						video(controls)
+							source(src='https://www.w3schools.com/html/mov_bbb.mp4', type='video/mp4')
+							source(src='https://www.w3schools.com/html/mov_bbb.ogg', type='video/ogg')
+							| If you see this the browser does not support HTML5 video.
+						
+				br
+				article#embedded__canvas
+					header
+						h2 Canvas
+					div
+						canvas canvas
+						
+				br
+				article#embedded__meter
+					header
+						h2 Meter
+					div
+						meter(value='2', min='0', max='10') 2 out of 10
+						
+				br
+				article#embedded__progress
+					header
+						h2 Progress
+					div
+						progress progress
+						
+				br
+				article#embedded__svg
+					header
+						h2 Inline SVG
+					div
+						svg(width='100px', height='100px')
+							circle(cx='60', cy='60', r='60', fill='#1fa3ec')
+								
+				br
+				article#embedded__iframe
+					header
+						h2 IFrame
+					div
+						iframe(src='http://sass-lang.com/', height='300')
+							
+			
+			hr
+			section#forms
+				header
+					h1 Form elements
+				form
+					fieldset#forms__input
+						legend Input fields
+						div
+							div
+								label(for='input__text') Text Input
+								input#input__text(type='text', placeholder='Text Input')
+							div
+								label(for='input__password') Password
+								input#input__password(type='password', placeholder='Type your Password')
+							div
+								label(for='input__webaddress') Web Address
+								input#input__webaddress(type='url', placeholder='http://yoursite.com')
+							div
+								label(for='input__emailaddress') Email Address
+								input#input__emailaddress(type='email', placeholder='name@email.com')
+							div
+								label(for='input__phone') Phone Number
+								input#input__phone(type='tel', placeholder='(999) 999-9999')
+							div
+								label(for='input__search') Search
+								input#input__search(type='search', placeholder='Enter Search Term')
+							div
+								label(for='input__text2') Number Input
+								input#input__text2(type='number', placeholder='Enter a Number')
+							div
+								label.error(for='input__text3') Error
+								input#input__text3.is-error(type='text', placeholder='Text Input')
+							div
+								label.valid(for='input__text4') Valid
+								input#input__text4.is-valid(type='text', placeholder='Text Input')
+					
+					br
+					fieldset#forms__select
+						legend Select menus
+						div
+							label(for='select') Select
+							select#select
+								optgroup(label='Option Group')
+									option Option One
+									option Option Two
+									option Option Three
+					
+					br
+					fieldset#forms__checkbox
+						legend Checkboxes
+						ul
+							li
+								label(for='checkbox1')
+									input#checkbox1(name='checkbox', type='checkbox', checked='checked')
+									|  Choice A
+							li
+								label(for='checkbox2')
+									input#checkbox2(name='checkbox', type='checkbox')
+									|  Choice B
+							li
+								label(for='checkbox3')
+									input#checkbox3(name='checkbox', type='checkbox')
+									|  Choice C
+					
+					br
+					fieldset#forms__radio
+						legend Radio buttons
+						ul
+							li
+								label(for='radio1')
+									input#radio1.radio(name='radio', type='radio', checked='checked')
+									|  Option 1
+							li
+								label(for='radio2')
+									input#radio2.radio(name='radio', type='radio')
+									|  Option 2
+							li
+								label(for='radio3')
+									input#radio3.radio(name='radio', type='radio')
+									|  Option 3
+					
+					br
+					fieldset#forms__textareas
+						legend Textareas
+						div
+							label(for='textarea') Textarea
+							textarea#textarea(rows='8', cols='48', placeholder='Enter your message here')
+								
+								
+					br
+					fieldset#forms__file
+						legend File Upload
+						div
+							input(type='file', name='pic', accept='image/*')
+							//- <input accept="file_extension|audio/*|video/*|image/*|media_type">
+								
+					br
+					fieldset#forms__html5
+						legend HTML5 inputs
+						div
+							label(for='ic') Color input
+							input#ic(type='color', value='#000000')
+						div
+							label(for='in') Number input
+							input#in(type='number', min='0', max='10', value='5')
+						div
+							label(for='ir') Range input
+							input#ir(type='range', value='10')
+						div
+							label(for='idd') Date input
+							input#idd(type='date', value='1970-01-01')
+						div
+							label(for='idm') Month input
+							input#idm(type='month', value='1970-01')
+						div
+							label(for='idw') Week input
+							input#idw(type='week', value='1970-W01')
+						div
+							label(for='idt') Datetime input
+							input#idt(type='datetime', value='1970-01-01T00:00:00Z')
+						div
+							label(for='idtl') Datetime-local input
+							input#idtl(type='datetime-local', value='1970-01-01T00:00')
+					
+					br
+					fieldset#forms__action
+						legend Action buttons
+						div
+							input(type='submit', value='input type=submit')
+							input(type='button', value='input type=button')
+							input(type='reset', value='input type=reset')
+							input(type='submit', value='input disabled', disabled='')
+						br
+						div
+							button(type='submit') button type=submit
+							button(type='button') button type=button
+							button(type='reset') button type=reset
+							button(type='button', disabled='') button disabled
+				
+			hr
+			section#states
+				header
+					h1 States
+				
+				div
+					fieldset
+						.info-state-bg
+							label(for="text_field-success") State-Info
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+
+						.success-state-bg
+							label State-Success:
+							label(for="checkbox1")
+								input#checkbox1(type="checkbox") 
+								span checkbox
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+							input(type="text")
+							textarea
+
+						.warning-state-bg
+							label State-Warning:
+							label(for="checkbox2")
+								input#checkbox2(type="checkbox") 
+								span checkbox
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+							input(type="text")
+							textarea
+
+						.danger-state-bg
+							label State-Danger:
+							label(for="checkbox3")
+								input#checkbox3(type="checkbox") 
+								span checkbox
+							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+							input(type="text")
+							textarea
+
+		include _includes/pug/_footer.pug
+
+		include _includes/pug/_scripts.pug

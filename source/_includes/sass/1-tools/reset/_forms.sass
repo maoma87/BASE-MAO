@@ -47,6 +47,13 @@ fieldset
 	border: $base-border
 	background-color: transparent
 	padding: $base-spacing
+	-webkit-margin-start: 0
+	-webkit-margin-end: 0
+	-webkit-padding-before: $base-spacing
+	-webkit-padding-start: $base-spacing
+	-webkit-padding-end: $base-spacing
+	-webkit-padding-after: $base-spacing
+
 
 legend
 	box-sizing: border-box
@@ -58,10 +65,15 @@ legend
 	font-weight: 600
 	margin-bottom: $small-spacing / 2
 
+	-webkit-padding-start: 0
+	-webkit-padding-end: 0
+
+
 label
-	font-size: 1rem
 	display: block
-	font-weight: 600
+	font-size: $label-font-size
+	font-family: $label-font-family
+	font-weight: $label-font-weight
 	margin-bottom: $small-spacing / 2
 
 textarea
@@ -85,7 +97,7 @@ textarea
 	-webkit-appearance: none
 	-moz-appearance: none
 
-::-webkit-input-placeholder
+::-webkit-input-placeholder,::-moz-placeholder,:-ms-input-placeholder,:-moz-placeholder
 	color: inherit
 	opacity: 0.54
 
