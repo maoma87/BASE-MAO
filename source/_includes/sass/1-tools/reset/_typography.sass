@@ -40,7 +40,7 @@ b,strong
 	font-weight: bolder
 
 // destaca el texto poniendolo en italic
-em, i
+em, i, dfn
 	font-style: italic
 
 // salto de linea
@@ -53,7 +53,7 @@ u
 
 // para "codigo"
 code,kbd,pre,samp
-	font-family: monospace
+	font-family: monospace, monospace
 	font-size: 1em
 
 // sub y super indice
@@ -61,6 +61,7 @@ sub,sup
 	font-size: 75%
 	line-height: 0
 	position: relative
+	vertical-align: baseline
 
 sub
 	bottom: -.25em
@@ -81,10 +82,7 @@ mark
 abbr[title]
 	border-bottom: none
 	text-decoration: underline
-
-// es parecido a abbr pero para definir los significados de algun termino
-dfn
-	font-style: italic
+	text-decoration: underline dotted
 
 // encierra el texto entre comillas
 blockquote, q
