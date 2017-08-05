@@ -21,11 +21,15 @@ $blue-grey: #607D8B
 
 // GrayScale
 $black: #000
-$darken-gray: lighten($black, 15%)
-$dark-gray: lighten($black, 30%)
+$darkest-gray: lighten($black, 10%)
+$darker-gray: lighten($black, 20%)
+$darken-gray: lighten($black, 30%)
+$dark-gray: lighten($black, 40%)
 $gray: lighten($black, 50%)
-$light-gray: lighten($black, 70%)
-$lighten-gray: lighten($black, 85%)
+$light-gray: lighten($black, 60%)
+$lighten-gray: lighten($black, 70%)
+$lighter-gray: lighten($black, 80%)
+$lightest-gray: lighten($black, 90%)
 $white: #fff
 
 // Validation states Colors
@@ -49,30 +53,34 @@ $selectionColor: $blue
 $selectionFontColor: $white
 
 // Typography -----------------------------------------------------
-$base-font-size: 16px
-$base-line-height: 1.5
+
+$base-light-font-weight: 100
+$base-medium-font-weight: 400
+$base-bold-font-weight: 700
 
 $base-font-family: $helvetica
-$base-font-weight: 400
+$base-font-size: 100%
+$base-font-weight: $base-medium-font-weight
+$base-line-height: 1.25
 
 $heading-font-family: $base-font-family
-$heading-font-weight: 700
-$heading-line-height: 1.2
+$heading-font-weight: $base-bold-font-weight
+$heading-line-height: $base-line-height
 
-$h1-font-size: 3.2rem
-$h2-font-size: 2.5rem
-$h3-font-size: 1.9rem
-$h4-font-size: 1.6rem
-$h5-font-size: 1.4rem
-$h6-font-size: 1.2rem
+$h1-font-size: 3em
+$h2-font-size: 2.665em
+$h3-font-size: 2.332em
+$h4-font-size: 1.999em
+$h5-font-size: 1.666em
+$h6-font-size: 1.333em
 
-$paragraph-font-size: $base-font-size
 $paragraph-font-family: $base-font-family
+$paragraph-font-size: $base-font-size
 $paragraph-font-weight: $base-font-weight
-$paragraph-line-height: 1.1
+$paragraph-line-height: $base-line-height
 
-$link-font-size: $base-font-size
 $link-font-family: $base-font-family
+$link-font-size: $base-font-size
 $link-font-weight: $base-font-weight
 
 $label-font-size: $base-font-size
@@ -90,14 +98,14 @@ $base-z-index: 0
 $base-border-color: $light-gray
 $base-border: 1px solid $base-border-color
 
-// Background Colors
-$base-background-color: $white
-$secondary-background-color: tint($base-border-color, 75%)
-
 // Forms
+$placeholder-color: $light-gray
+$base-background-color: white
 $form-box-shadow: inset 0 1px 3px rgba($black, 0.06)
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3)
 
 // Animations
 $base-duration: 150ms
 $base-timing: ease-in-out
+
+// z-index

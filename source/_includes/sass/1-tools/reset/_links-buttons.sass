@@ -3,19 +3,19 @@ a
 	font-size: $link-font-size
 	font-weight: $link-font-weight
 	text-decoration: none
-	color: $action-color
+	color: $linkColor
 	background-color: transparent
 	transition: all $base-duration $base-timing
 	-webkit-text-decoration-skip: objects
 
 	&:hover
-		color: $linkHoverColor
+
 
 	&:active, &:hover
 		outline-width: 0
 
 	&:active, &:focus, &:hover
-		color: shade($action-color, 25%)
+		color: $linkHoverColor
 
 #{$all-buttons}
 	appearance: none
