@@ -9,7 +9,7 @@ input
 
 
 #{$all-text-inputs}, select[multiple]
-	background-color: $base-background-color
+	background-color: $form-background-color
 	border: $base-border
 	border-radius: $base-border-radius
 	box-shadow: $form-box-shadow
@@ -28,7 +28,7 @@ input
 		outline: none
 
 	&:disabled
-		background-color: shade($base-background-color, 5%)
+		background-color: shade($form-background-color, 5%)
 		cursor: not-allowed
 
 		&:hover
@@ -39,9 +39,21 @@ select
 	margin-bottom: $small-spacing
 	max-width: 100%
 	width: auto
+	padding: $small-spacing
+	border-radius: $base-border-radius
+
+::-webkit-file-upload-button
+	background-color: $link-color
+	border: none
+	cursor: pointer
+	color: $white
+	border-radius: $base-border-radius
+	padding: $small-spacing $base-spacing
+	&:hover
+		background-color: $link-hover-color
 
 optgroup
-	font-weight: bold
+	font-weight: $base-bold-font-weight
 
 fieldset
 	border: $base-border

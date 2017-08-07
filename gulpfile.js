@@ -340,6 +340,7 @@ gulp.task('img', () => {
 gulp.task('servidor', function() {
 	browserSync.init({
 		server: pub, // Carpeta del servidor
+		// reloadDelay: 2000,
 		open: false,
 		notify: false
 	});

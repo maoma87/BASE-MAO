@@ -5,8 +5,7 @@ html(lang='es')
 
 	body
 
-		include _includes/pug/_header.pug
-		nav(style="position:fixed;width:15%;padding:15px;")
+		nav(style="position:fixed;width:15%;padding:15px;max-height:100vh;overflow-y:scroll;")
 			ul
 				li
 					a(href='#text') Text
@@ -544,7 +543,5 @@ html(lang='es')
 							p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 							input(type="text")
 							textarea
-
-		include _includes/pug/_footer.pug
 
 		include _includes/pug/_scripts.pug

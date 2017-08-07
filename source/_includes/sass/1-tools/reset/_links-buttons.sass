@@ -3,7 +3,7 @@ a
 	font-size: $link-font-size
 	font-weight: $link-font-weight
 	text-decoration: none
-	color: $linkColor
+	color: $link-color
 	background-color: transparent
 	transition: all $base-duration $base-timing
 	-webkit-text-decoration-skip: objects
@@ -15,7 +15,7 @@ a
 		outline-width: 0
 
 	&:active, &:focus, &:hover
-		color: $linkHoverColor
+		color: $link-hover-color
 
 #{$all-buttons}
 	appearance: none
@@ -25,7 +25,7 @@ a
 	border: 0
 	border-radius: $base-border-radius
 	color: $white
-	background-color: $action-color
+	background-color: $link-color
 	font-family: $link-font-family
 	font-weight: $link-font-weight
 	font-size: $link-font-size
@@ -41,8 +41,8 @@ a
 	transition: background-color $base-duration $base-timing
 
 	&:hover, &:focus
-		background-color: shade($action-color, 20%)
-		color: #fff
+		background-color: $link-hover-color
+		color: $white
 
 	&:disabled
 		cursor: not-allowed
