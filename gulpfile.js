@@ -63,7 +63,7 @@ var carpeta = {
 
 // TASKS ------------------------------------------------------------------
 
-// COMPILAR JADE
+// COMPILAR PUG
 gulp.task('01-PUG', function() {
 	var YOUR_LOCALS = {};
 
@@ -74,7 +74,7 @@ gulp.task('01-PUG', function() {
 		//SE ENCARGA DE QUE SOLO COMPILE EL ARCHIVO QUE CAMBIO
 		.pipe(changed(carpeta.pug.pub, {extension: '.html'}))
 
-		// COMPLIA JADE
+		// COMPLIA PUG
 		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
@@ -94,7 +94,7 @@ gulp.task('01-PUG', function() {
 		}));
 });
 
-// COMPILAR JADE DE INCLUDES
+// COMPILAR PUG DE INCLUDES
 gulp.task('02-PUG-includes', function() {
 	var YOUR_LOCALS = {};
 
@@ -102,7 +102,7 @@ gulp.task('02-PUG-includes', function() {
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
-		// COMPLIA JADE
+		// COMPLIA PUG
 		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
@@ -113,8 +113,8 @@ gulp.task('02-PUG-includes', function() {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe( notify("JADE COMPILADO: <%= file.relative %>"))
+		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
+		.pipe( notify("PUG COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.reload({
@@ -122,7 +122,7 @@ gulp.task('02-PUG-includes', function() {
 		}));
 });
 
-// COMPILAR JADE EN LINEA
+// COMPILAR PUG EN LINEA
 gulp.task('03-PUG-final', function() {
 	var YOUR_LOCALS = {};
 
@@ -130,7 +130,7 @@ gulp.task('03-PUG-final', function() {
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
-		// COMPLIA JADE
+		// COMPLIA PUG
 		.pipe(pug({
 			locals: YOUR_LOCALS
 		}))
@@ -138,8 +138,8 @@ gulp.task('03-PUG-final', function() {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe( notify("JADE FINAL COMPILADO: <%= file.relative %>"))
+		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
+		.pipe( notify("PUG FINAL COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.reload({
@@ -164,7 +164,7 @@ gulp.task('cache-bust',function(){
 
 
 
-// COMPILAR JADE CON LOS ESTILOS EN LINEA
+// COMPILAR PUG CON LOS ESTILOS EN LINEA
 gulp.task('04-CSS-inline', function() {
 	var YOUR_LOCALS = {};
 
@@ -183,8 +183,8 @@ gulp.task('04-CSS-inline', function() {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe( notify("JADE INLINE COMPILADO: <%= file.relative %>"))
+		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
+		.pipe( notify("PUG INLINE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.reload({
@@ -280,7 +280,7 @@ gulp.task('compress', function() {
 
 // CONCATENA Y COMPRIME LOS ARCHIVOS JS EN LA CARPETA JS DE INCLUDES
 gulp.task('concat', function() {
-	return gulp.src([carpeta.js.inc + '/_jquery-*.js', carpeta.js.inc + '/*.js'])
+	return gulp.src([carpeta.js + '_includes/_jquery-*.js', carpeta.js.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
@@ -350,9 +350,9 @@ gulp.task('servidor', function() {
 // WATCH
 gulp.task('watch', function() {
 
-	// VIGILA LOS ARCHIVOS JADE DENTRO DE _includes/pug para compilar a html
+	// VIGILA LOS ARCHIVOS PUG DENTRO DE _includes/pug para compilar a html
 	gulp.watch(carpeta.pug.inc , ['02-PUG-includes']);
-	// VIGILA LOS ARCHIVOS JADE DENTRO DE root para compilar a html
+	// VIGILA LOS ARCHIVOS PUG DENTRO DE root para compilar a html
 	gulp.watch(carpeta.pug.src , ['01-PUG']);
 
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE _includes/sass para compilar main.sass
