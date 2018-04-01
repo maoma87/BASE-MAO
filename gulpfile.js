@@ -21,7 +21,7 @@ var gulp				= require('gulp'),
 	imagemin			= require('gulp-imagemin');
 
 
-var tsProject = typescript.createProject('tsconfig.json');
+// var tsProject = typescript.createProject('tsconfig.json');
 
 
 var src		= './source', // -> Desarrollo
@@ -280,7 +280,7 @@ gulp.task('compress', function() {
 
 // CONCATENA Y COMPRIME LOS ARCHIVOS JS EN LA CARPETA JS DE INCLUDES
 gulp.task('concat', function() {
-	return gulp.src([carpeta.js + '_includes/_jquery-*.js', carpeta.js.inc])
+	return gulp.src([src + '/_includes/js/_jquery-*.js', carpeta.js.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
