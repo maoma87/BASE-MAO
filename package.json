@@ -9,7 +9,7 @@
   },
   "readme": "../README.md",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "bourbon": "^5.0.0",
