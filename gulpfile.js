@@ -15,6 +15,7 @@ var gulp				= require('gulp'),
 	cssbeautify			= require('gulp-cssbeautify'),
 	cachebust			= require('gulp-cache-bust'),
 	concat				= require('gulp-concat'),
+	babel				= require('gulp-babel'),
 	uglify				= require('gulp-uglify'),
 	imagemin			= require('gulp-imagemin');
 
@@ -260,8 +261,15 @@ gulp.task('compress',() => {
 
 		.pipe(changed(carpeta.js.pub, {extension: '.js'}))
 
+		.pipe(babel({
+			presets: ['env']
+		}))
+
 		// COMPRIME EL JAVASCRIPT
 		.pipe(uglify())
+
+		// GENERA EL MAPA DEL JS
+		.pipe(sourcemaps.write('.'))
 
 		// GUARDA EL ARCHIVO
 		.pipe(gulp.dest(carpeta.js.pub))
