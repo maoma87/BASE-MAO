@@ -23,8 +23,8 @@ var gulp				= require('gulp'),
 // var tsProject = typescript.createProject('tsconfig.json');
 
 
-var src		= './source', // -> Desarrollo
-	pub		= './public'; // -> Producción
+var src = './source', // -> Desarrollo
+	pub = './public'; // -> Producción
 
 // VARIABLES
 var carpeta = {
@@ -63,7 +63,7 @@ var carpeta = {
 // TASKS ------------------------------------------------------------------
 
 // COMPILAR PUG
-gulp.task('pug',() => {
+gulp.task('pug', done => {
 	var YOUR_LOCALS = {};
 
 	gulp.src([carpeta.pug.src , '!' + carpeta.pug.inc])
@@ -91,10 +91,12 @@ gulp.task('pug',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // COMPILAR PUG DE INCLUDES
-gulp.task('pugIncludes',() => {
+gulp.task('pugIncludes', done => {
 	var YOUR_LOCALS = {};
 
 	gulp.src(carpeta.pug.src)
@@ -119,10 +121,12 @@ gulp.task('pugIncludes',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // COMPILAR PUG EN LINEA
-gulp.task('pugFinal',() => {
+gulp.task('pugFinal', done => {
 	var YOUR_LOCALS = {};
 
 	gulp.src(carpeta.pug.src)
@@ -144,10 +148,12 @@ gulp.task('pugFinal',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // CACHE BUST
-gulp.task('cacheBust',() => {
+gulp.task('cacheBust', done => {
 
 	gulp.src(carpeta.pug.pub + '**/*.html')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -158,12 +164,14 @@ gulp.task('cacheBust',() => {
 		}))
 
 		.pipe(gulp.dest(carpeta.pug.pub));
+
+	done()
 });
 
 
 
 // COMPILAR PUG CON LOS ESTILOS EN LINEA
-gulp.task('cssInline',() => {
+gulp.task('cssInline', done => {
 	var YOUR_LOCALS = {};
 
 	gulp.src(carpeta.pug.pub + '/*.html')
@@ -188,11 +196,13 @@ gulp.task('cssInline',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 
 // COMPILAR SASS
-gulp.task('sass',() => {
+gulp.task('sass', done => {
 	gulp.src(carpeta.css.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
@@ -216,10 +226,12 @@ gulp.task('sass',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // COMPILAR SASS EN LINEA
-gulp.task('sassFinal',() => {
+gulp.task('sassFinal', done => {
 	gulp.src(carpeta.css.src)
 		// COMPILA SASS
 		.pipe(sass().on('error', sass.logError))
@@ -249,12 +261,14 @@ gulp.task('sassFinal',() => {
 
 		// GUARDA EL ARCHIVO CSS
 		.pipe(gulp.dest(carpeta.css.pub));
+
+	done()
 });
 
 
 // COMPRIME EL ARCHIVO DE FUNCIONES PRINCIPAL
-gulp.task('compress',() => {
-	return gulp.src(carpeta.js.src)
+gulp.task('compress', done => {
+	gulp.src(carpeta.js.src)
 
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
@@ -281,11 +295,13 @@ gulp.task('compress',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // CONCATENA Y COMPRIME LOS ARCHIVOS JS EN LA CARPETA JS DE INCLUDES
-gulp.task('concat',() => {
-	return gulp.src([src + '/_includes/js/_jquery-*.js', carpeta.js.inc])
+gulp.task('concat', done => {
+	gulp.src([src + '/_includes/js/_jquery-*.js', carpeta.js.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
 
@@ -305,47 +321,55 @@ gulp.task('concat',() => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+
+	done()
 });
 
 // COMPRESION DE IMAGENES
-gulp.task('img',() => {
-	return gulp.src(carpeta.img.src)
+gulp.task('img', done => {
+	gulp.src(carpeta.img.src)
 		.pipe(imagemin({
 			progressive: true
 		}))
 		.pipe(gulp.dest(carpeta.img.pub));
+
+	done()
 });
 
 
 // MONTAJE DEL SERVIDOR
-gulp.task('servidor',() => {
+gulp.task('servidor', done => {
 	browserSync.init({
 		server: pub, // Carpeta del servidor
 		// reloadDelay: 2000,
 		open: false,
 		notify: false
 	});
+
+	done()
 });
 
 
 // WATCH
-gulp.task('watch',() => {
+gulp.task('watch', done => {
 
 	// VIGILA LOS ARCHIVOS PUG DENTRO DE _includes/pug para compilar a html
-	gulp.watch(carpeta.pug.inc , ['pugIncludes']);
+	gulp.watch(carpeta.pug.inc , gulp.series('pugIncludes'));
 	// VIGILA LOS ARCHIVOS PUG DENTRO DE root para compilar a html
-	gulp.watch(carpeta.pug.src , ['pug']);
+	gulp.watch(carpeta.pug.src , gulp.series('pug'));
 
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE _includes/sass para compilar main.sass
-	gulp.watch(carpeta.css.inc , ['sass']);
+	gulp.watch(carpeta.css.inc , gulp.series('sass'));
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
-	gulp.watch(carpeta.css.src , ['sass']);
+	gulp.watch(carpeta.css.src , gulp.series('sass'));
 
 	// Vigila los cambios en los archivos .js de la carpeta js
-	gulp.watch(carpeta.js.src , ['compress']);
+	gulp.watch(carpeta.js.src , gulp.series('compress'));
 	// Vigila los cambios en los archivos .js de los includes
-	// gulp.watch(carpeta.js.inc , ['concat']);
+	// gulp.watch(carpeta.js.inc , gulp.series('concat'));
+
+	done()
 });
 
 // DEFAULT
-gulp.task('default', ['servidor', 'watch']);
+gulp.task('default', gulp.parallel('servidor','watch'));
