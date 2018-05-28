@@ -17,7 +17,8 @@ var gulp				= require('gulp'),
 	concat				= require('gulp-concat'),
 	babel				= require('gulp-babel'),
 	uglify				= require('gulp-uglify'),
-	imagemin			= require('gulp-imagemin');
+	imagemin			= require('gulp-imagemin'),
+	browserify			= require('gulp-browserify');
 
 
 // var tsProject = typescript.createProject('tsconfig.json');
@@ -47,9 +48,9 @@ var carpeta = {
 		pub		: pub + '/js'
 	},
 
-	ts: {
-		src		: src + '/app/**/*.ts',
-		inc		: src + '/app/**/*.ts',
+	vue: {
+		src		: src + '/app/**/*.js',
+		inc		: src + '/app/**/*.vue',
 		pub		: pub + '/js/app'
 	},
 
@@ -61,6 +62,35 @@ var carpeta = {
 
 
 // TASKS ------------------------------------------------------------------
+
+//COMPILAR VUE
+gulp.task('vue', done => {
+	gulp.src(carpeta.vue.src)
+		.pipe(plumber())
+		.pipe(browserify({
+			transform: ['vueify', 'babelify', 'aliasify'] }))
+
+
+
+
+		.pipe(gulp.dest(carpeta.vue.pub))
+
+
+		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
+		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
+
+		// REFRESCADO DEL NAVEGADOR
+		.pipe(browserSync.reload({
+			stream: true
+		}));
+	done()
+});
+
+
+
+
+
+
 
 // COMPILAR PUG
 gulp.task('pug', done => {
@@ -367,6 +397,11 @@ gulp.task('watch', done => {
 	gulp.watch(carpeta.js.src , gulp.series('compress'));
 	// Vigila los cambios en los archivos .js de los includes
 	// gulp.watch(carpeta.js.inc , gulp.series('concat'));
+
+	// VIGILA LOS ARCHIVOS DE VUE DENTRO DE _includes/app
+	gulp.watch(carpeta.vue.inc , gulp.series('vue'));
+	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
+	gulp.watch(carpeta.vue.src , gulp.series('vue'));
 
 	done()
 });
