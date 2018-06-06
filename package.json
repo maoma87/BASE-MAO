@@ -42,7 +42,8 @@
     "gulp-uglify": "^3.0.0",
     "gulp-vueify": "^0.0.3",
     "vue": "^2.5.16",
-	"vueify": "9.0.0",
+    "vue-router": "^3.0.1",
+    "vueify": "9.0.0",
     "vueify-insert-css": "^1.0.0"
   },
   "browser": {
