@@ -1,43 +1,30 @@
-<template>
-	<div class="section green about" id="js-graphics">
-		<div class="titulo">
-			<h2>about me</h2>
-		</div>
-		<div class="about__graphics-cont">
-			<div class="image-cont">
-				<div class="image-frame">
-					<img :src="datos.picture" alt="">
-				</div>
-			</div>
-			<div class="graphics bar-inipos">
-				<div class="bar-container bar-orange">
-					<span>web</span>
-					<div class="bar-underline">
-						<div class="bar-inside"></div>
-					</div>
-				</div>
-				<div class="bar-container bar-green">
-					<span>brand</span>
-					<div class="bar-underline">
-						<div class="bar-inside"></div>
-					</div>
-				</div>
-				<div class="bar-container bar-red">
-					<span>print</span>
-					<div class="bar-underline">
-						<div class="bar-inside"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="about__text-cont">
-			<p>{{datos.bio}}</p>
-		</div>
-		<div class="about__keywords">
-			<span v-for="(keyword,index) in datos.keywords" :key="'keyword-'+index">{{keyword}}</span>
-		</div>
-	</div>
+<template lang="pug">
+	#js-graphics.section.green.about
+		.titulo
+			h2 about me
+		.about__graphics-cont
+			.image-cont
+				.image-frame
+					img(:src='datos.picture', alt='')
+			.graphics.bar-inipos
+				.bar-container.bar-orange
+					span web
+					.bar-underline
+						.bar-inside
+				.bar-container.bar-green
+					span brand
+					.bar-underline
+						.bar-inside
+				.bar-container.bar-red
+					span print
+					.bar-underline
+						.bar-inside
+		.about__text-cont
+			p {{datos.bio}}
+		.about__keywords
+			span(v-for='(keyword,index) in datos.keywords', :key="'keyword-'+index") {{keyword}}
 </template>
+
 
 
 <script>
@@ -69,6 +56,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
 
 </style>

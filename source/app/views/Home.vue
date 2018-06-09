@@ -1,23 +1,20 @@
-<template>
-	<div id="home">
+<template lang="pug">
 
-		<vheader v-if="datos" :datos="datos.header"></vheader>
+	#home
+		vheader(v-if='datos', :datos='datos.header')
 
-		<vportfolio v-if="datos.portfolio" :datos="datos.portfolio"></vportfolio>
-		
-		<vabout v-if="datos.about" :datos="datos.about"></vabout>
+		vportfolio(v-if='datos.portfolio', :datos='datos.portfolio')
 
-		<div class="mail-section orange" v-if="datos.about">
-			<a class="mail-link" href="#">{{datos.about.email}}</a>
-		</div>
+		vabout(v-if='datos.about', :datos='datos.about')
 
-		<footer class="red footer" v-if="datos.header">
-			<span>{{datos.header.name}} {{new Date().getFullYear()}}</span>
-		</footer>
+		.mail-section.orange(v-if='datos.about')
+			a.mail-link(href='#') {{datos.about.email}}
 
-		<vligthboxes v-if="datos.portfolio" :datos="datos.portfolio"></vligthboxes>
+		footer.red.footer(v-if='datos.header')
+			span {{datos.header.name}} {{new Date().getFullYear()}}
 
-	</div>
+		vligthboxes(v-if='datos.portfolio', :datos='datos.portfolio')
+
 </template>
 
 <script>
@@ -71,6 +68,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
 
 </style>

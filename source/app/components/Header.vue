@@ -1,16 +1,14 @@
-<template>
-    <header class="header" v-if="datos" v-on:mousemove="logoRotation">
-        <div class="header__logo-cont">
-            <div class="header__logo__bubble">
-                <span v-if="datos.greetings">{{datos.greetings[greetingRndm(datos.greetings)]}}</span>
-            </div>
-            <img :src="datos.logo" alt="">
-        </div>
-        <div class="header__content">
-            <span class="nombre">{{datos.name}}</span>
-            <span v-html="datos.under_name"></span>
-        </div>
-    </header>
+<template lang="pug">
+
+    header.header(v-if='datos', v-on:mousemove='logoRotation')
+        .header__logo-cont
+            .header__logo__bubble
+                span(v-if='datos.greetings') {{datos.greetings[greetingRndm(datos.greetings)]}}
+            img(:src='datos.logo', alt='')
+        .header__content
+            span.nombre {{datos.name}}
+            span(v-html='datos.under_name')
+
 </template>
 
 <script>
@@ -54,6 +52,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+
+
 
 </style>

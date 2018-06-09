@@ -1,22 +1,14 @@
-<template>
-    <div class="lightboxes">
+<template lang="pug">
+    .lightboxes
+        .imagen-portafolio-container(v-for='(item,index) in datos.web', :key="'lb-web-'+ index", :id='item.id')
+            .imagen-portafolio
+                img(:src='item.img_src', :alt='item.name')
+            .imagen-footer
+                a.btn-website(:href='item.link', target='_blank') launch website
+        .imagen-portafolio-container(v-for='(item,index) in datos.branding', :key="'lb-brand-'+ index", :id='item.id')
+            .imagen-portafolio
+                img(:src='item.img_src', :alt='item.name')
 
-        <div class="imagen-portafolio-container" v-for="(item,index) in datos.web" :key="'lb-web-'+ index" :id="item.id">
-            <div class="imagen-portafolio">
-                <img :src="item.img_src" :alt="item.name">
-            </div>
-            <div class="imagen-footer">
-                <a class="btn-website" :href="item.link" target="_blank">launch website</a>
-            </div>
-        </div>
-
-        <div class="imagen-portafolio-container" v-for="(item,index) in datos.branding" :key="'lb-brand-'+ index" :id="item.id">
-            <div class="imagen-portafolio">
-                <img :src="item.img_src" :alt="item.name">
-            </div>
-        </div>
-
-    </div>
 </template>
 
 
