@@ -6,7 +6,7 @@
 		<div class="about__graphics-cont">
 			<div class="image-cont">
 				<div class="image-frame">
-					<img src="img/me.jpg" alt="">
+					<img :src="datos.picture" alt="">
 				</div>
 			</div>
 			<div class="graphics bar-inipos">
@@ -31,30 +31,10 @@
 			</div>
 		</div>
 		<div class="about__text-cont">
-			<p>I am a passionate graphic designer, with more than ten years of experience in the field of advertising, corporate and web design, publishing and teaching. With the use of graphical tools, web, 3d and multimedia. <br> <br> Highlighted by the professionalism, responsibility and initiative with which I have developed each of the projects I have worked on. Always ready to evolve keeping up with the current of new technologies.
-			</p>
+			<p>{{datos.bio}}</p>
 		</div>
 		<div class="about__keywords">
-			<span>Adobe Illustrator</span>
-			<span>Adobe Photoshop</span>
-			<span>Adobe Indesign</span>
-			<span>HTML5</span>
-			<span>CSS3</span>
-			<span>JavaScript</span>
-			<span>jQuery</span>
-			<span>Vue.js</span>
-			<span>SASS</span>
-			<span>PUG.JS</span>
-			<span>GULP.JS</span>
-			<span>GIT</span>
-			<span>Adobe ExtendScript</span>
-			<span>CorelDRAW</span>
-			<span>Adobe Edge</span>
-			<span>Adobe Audition</span>
-			<span>Adobe After Efects</span>
-			<span>3DS Max</span>
-			<span>V-ray</span>
-			<span>MaxScrpt</span>
+			<span v-for="(keyword,index) in datos.keywords" :key="'keyword-'+index">{{keyword}}</span>
 		</div>
 	</div>
 </template>
@@ -63,12 +43,13 @@
 <script>
 export default {
 	name: "vabout",
+	props:['datos'],
 	data(){
 		return{
 
 		}
 	},
-	mounted: function(){
+	mounted(){
 		// eslint-disable-next-line
 		var $graphics = $('#js-graphics');
 		var $graphics_container = $graphics.find('.graphics');
@@ -88,6 +69,6 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style>
 
 </style>

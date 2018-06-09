@@ -14,7 +14,7 @@
                 </a>
                 <div class="item-hover">
                     <span>
-                        {{item.nombre}}
+                        {{item.name}}
                         <br>
                         {{item.description}}
                     </span>
@@ -31,7 +31,7 @@
                 </a>
                 <div class="item-hover">
                     <span>
-                        {{item.nombre}}
+                        {{item.name}}
                         <br>
                         {{item.description}}
                     </span>
@@ -48,7 +48,7 @@
                 </a>
                 <div class="item-hover">
                     <span>
-                        {{item.nombre}}
+                        {{item.name}}
                         <br>
                         {{item.description}}
                     </span>
@@ -74,6 +74,6 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style>
 
 </style>

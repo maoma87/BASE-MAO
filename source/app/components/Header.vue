@@ -24,7 +24,7 @@ export default {
     },
     methods:{
         greetingRndm: array => {
-            var rndmNum = Math.floor((Math.random() * array.length) + 1)
+            var rndmNum = Math.floor((Math.random() * array.length))            
             return rndmNum
         },
 

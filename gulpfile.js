@@ -49,6 +49,7 @@ var carpeta = {
 	},
 
 	vue: {
+		file	: src + '/app/main.js',
 		src		: src + '/app/**/*.js',
 		inc		: src + '/app/**/*.vue',
 		pub		: pub + '/js/app'
@@ -65,7 +66,7 @@ var carpeta = {
 
 //COMPILAR VUE
 gulp.task('vue', done => {
-	gulp.src(carpeta.vue.src)
+	gulp.src(carpeta.vue.file)
 		.pipe(plumber())
 		.pipe(browserify({
 			transform: ['vueify', 'babelify', 'aliasify'] }))
@@ -77,7 +78,7 @@ gulp.task('vue', done => {
 
 
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
+		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.reload({
