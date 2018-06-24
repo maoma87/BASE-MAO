@@ -20,10 +20,6 @@ var gulp				= require('gulp'),
 	imagemin			= require('gulp-imagemin'),
 	browserify			= require('gulp-browserify');
 
-
-// var tsProject = typescript.createProject('tsconfig.json');
-
-
 var src = './source', // -> Desarrollo
 	pub = './public'; // -> Producción
 
@@ -68,15 +64,15 @@ var carpeta = {
 gulp.task('vue', done => {
 	gulp.src(carpeta.vue.file)
 		.pipe(plumber())
+
 		.pipe(browserify({
 			transform: ['vueify', 'babelify', 'aliasify'] }))
 
-
-
-
+		// COMPRIME EL JAVASCRIPT
+		.pipe(uglify())
+		
 		.pipe(gulp.dest(carpeta.vue.pub))
-
-
+		
 		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
 		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 
@@ -86,12 +82,6 @@ gulp.task('vue', done => {
 		}));
 	done()
 });
-
-
-
-
-
-
 
 // COMPILAR PUG
 gulp.task('pug', done => {
@@ -230,7 +220,6 @@ gulp.task('cssInline', done => {
 
 	done()
 });
-
 
 // COMPILAR SASS
 gulp.task('sass', done => {

@@ -43,11 +43,6 @@ export default {
                 'transform': newTransformRotateXY
             });
         }
-
-
-    },
-
-    mounted: function(){
     }
 }
 </script>
