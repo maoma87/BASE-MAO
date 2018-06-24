@@ -1,10 +1,10 @@
 const config = {
-    apiKey: "AIzaSyCXC1tD1EVmt6zyfCAHpGwucnqD-ZRriO8",
-    authDomain: "maoma-website.firebaseapp.com",
-    databaseURL: "https://maoma-website.firebaseio.com",
-    projectId: "maoma-website",
-    storageBucket: "maoma-website.appspot.com",
-    messagingSenderId: "564155916456" 
+    apiKey: "XXXXXXXXXXXXXXXXX",
+    authDomain: "XXXXXXXXXXXXXXXXX",
+    databaseURL: "XXXXXXXXXXXXXXXXX",
+    projectId: "XXXXXXXXXXXXXXXXX",
+    storageBucket: "XXXXXXXXXXXXXXXXX",
+    messagingSenderId: "XXXXXXXXXXXXXXXXX" 
 };
 
 const firebaseApp = firebase.initializeApp(config);
