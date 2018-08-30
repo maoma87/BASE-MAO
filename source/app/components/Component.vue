@@ -1,9 +1,9 @@
 <template lang="pug">
+
 	#vcomponent
-		span ya esta todo!
+		h1 Hola Mao
+
 </template>
-
-
 
 <script>
 export default {
