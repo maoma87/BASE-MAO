@@ -1,8 +1,7 @@
 {
-  "env": {
-    "development": {
-      "compact": false
-    }
-  },
-  "presets": ["es2015","env"]
+	"presets": [
+		[
+			"@babel/preset-env"
+		]
+	]
 }

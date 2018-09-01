@@ -1,24 +1,24 @@
-var gulp				= require('gulp'),
-	plumber				= require('gulp-plumber'),
-	browserSync			= require('browser-sync').create(),
-	notify				= require('gulp-notify'),
-	pug					= require('gulp-pug'),
-	inlineCss 			= require('gulp-inline-css'),
-	changed				= require('gulp-changed'),
-	prettify			= require('gulp-prettify'),
-	sass				= require('gulp-sass'),
-	sourcemaps			= require('gulp-sourcemaps'),
-	stripCssComments	= require('gulp-strip-css-comments'),
-	autoprefixer		= require('gulp-autoprefixer'),
-	csso				= require('gulp-csso'),
-	cssnano				= require('gulp-cssnano'),
-	cssbeautify			= require('gulp-cssbeautify'),
-	cachebust			= require('gulp-cache-bust'),
-	concat				= require('gulp-concat'),
-	babel				= require('gulp-babel'),
-	uglify				= require('gulp-uglify'),
-	imagemin			= require('gulp-imagemin'),
-	browserify			= require('gulp-browserify');
+var	gulp							= require('gulp'),
+		plumber						= require('gulp-plumber'),
+		browserSync				= require('browser-sync').create(),
+		notify						= require('gulp-notify'),
+		pug								= require('gulp-pug'),
+		inlineCss 				= require('gulp-inline-css'),
+		changed						= require('gulp-changed'),
+		prettify					= require('gulp-prettify'),
+		sass							= require('gulp-sass'),
+		sourcemaps				= require('gulp-sourcemaps'),
+		stripCssComments	= require('gulp-strip-css-comments'),
+		autoprefixer			= require('gulp-autoprefixer'),
+		csso							= require('gulp-csso'),
+		cssnano						= require('gulp-cssnano'),
+		cssbeautify				= require('gulp-cssbeautify'),
+		cachebust					= require('gulp-cache-bust'),
+		concat						= require('gulp-concat'),
+		babel							= require('gulp-babel'),
+		uglify						= require('gulp-uglify'),
+		imagemin					= require('gulp-imagemin'),
+		webpack 					= require('webpack-stream')
 
 var src = './source', // -> Desarrollo
 	pub = './public'; // -> Producción
@@ -45,10 +45,10 @@ var carpeta = {
 	},
 
 	vue: {
-		file	: src + '/app/main.js',
+		file	: src + '/app/app.js',
 		src		: src + '/app/**/*.js',
 		inc		: src + '/app/**/*.vue',
-		pub		: pub + '/js/app'
+		pub		: pub + '/js'
 	},
 
 	img: {
@@ -60,16 +60,12 @@ var carpeta = {
 
 // TASKS ------------------------------------------------------------------
 
-//COMPILAR VUE
+// COMPILAR VUE WEBPACK
 gulp.task('vue', done => {
 	gulp.src(carpeta.vue.file)
 		.pipe(plumber())
 
-		.pipe(browserify({
-			transform: ['vueify', 'babelify', 'aliasify'] }))
-
-		// COMPRIME EL JAVASCRIPT
-		.pipe(uglify())
+		.pipe(webpack(require('./webpack.config.js')))
 		
 		.pipe(gulp.dest(carpeta.vue.pub))
 		
