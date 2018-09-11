@@ -51,8 +51,13 @@ var carpeta = {
 		pub		: pub + '/js'
 	},
 
+	json: {
+		src		: src + '/json/*.json',
+		pub		: pub + '/json'
+	},
+
 	img: {
-		all		: src + '/img/**/*.{jpg,jpeg,png,gif,svg,JPG,JPEG}',
+		src		: src + '/img/**/*.{jpg,jpeg,png,gif,svg,JPG,JPEG}',
 		pub		: pub + '/img'
 	}
 };
@@ -352,6 +357,15 @@ gulp.task('img', done => {
 	done()
 });
 
+// COPIA DE ARCHIVO JSON
+gulp.task('json', done => {
+	gulp.src(carpeta.json.src)
+		
+		.pipe(gulp.dest(carpeta.json.pub));
+
+	done()
+});
+
 
 // MONTAJE DEL SERVIDOR
 gulp.task('servidor', done => {
@@ -384,10 +398,13 @@ gulp.task('watch', done => {
 	// Vigila los cambios en los archivos .js de los includes
 	// gulp.watch(carpeta.js.inc , gulp.series('concat'));
 
-	// VIGILA LOS ARCHIVOS DE VUE DENTRO DE _includes/app
+	// VIGILA LOS ARCHIVOS .VUE DENTRO DE app
 	gulp.watch(carpeta.vue.inc , gulp.series('vue'));
-	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
-	gulp.watch(carpeta.vue.src , gulp.series('vue'));
+	// VIGILA LOS ARCHIVOS JS DENTRO DE app
+	gulp.watch(carpeta.vue.src, gulp.series('vue'));
+
+	// VIGILA LOS ARCHIVOS JSON
+	gulp.watch(carpeta.json.src, gulp.series('json'));
 
 	done()
 });
