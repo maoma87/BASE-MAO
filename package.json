@@ -10,23 +10,21 @@
   "readme": "../README.md",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "axios": "^0.18.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-loader": "^8.0.2",
     "bourbon": "^5.1.0",
     "browser-sync": "^2.24.7",
     "css-loader": "^1.0.0",
-    "firebase": "^5.4.2",
+    "eslint": "^5.6.0",
+    "firebase": "^5.5.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-browserify": "^0.5.1",
     "gulp-cache-bust": "^1.4.0",
     "gulp-changed": "^3.2.0",
     "gulp-concat": "^2.6.1",
-    "gulp-cssbeautify": "^1.0.0",
     "gulp-cssnano": "^2.1.3",
     "gulp-csso": "^3.0.1",
     "gulp-imagemin": "^4.1.0",
@@ -45,16 +43,16 @@
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.17",
-    "vue-loader": "^15.4.1",
+    "vue-loader": "^15.4.2",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",
     "vuex": "^3.0.1",
-    "webpack": "^4.17.1",
+    "webpack": "^4.19.0",
     "webpack-cli": "^3.1.0",
     "webpack-stream": "^5.1.1"
-	},
-	"browser": {
-		"vue": "vue/dist/vue.common.js"
-	}
+  },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
+  }
 }

@@ -12,7 +12,6 @@ var	gulp							= require('gulp'),
 		autoprefixer			= require('gulp-autoprefixer'),
 		csso							= require('gulp-csso'),
 		cssnano						= require('gulp-cssnano'),
-		cssbeautify				= require('gulp-cssbeautify'),
 		cachebust					= require('gulp-cache-bust'),
 		concat						= require('gulp-concat'),
 		babel							= require('gulp-babel'),
@@ -194,8 +193,6 @@ gulp.task('cacheBust', done => {
 
 // COMPILAR PUG CON LOS ESTILOS EN LINEA
 gulp.task('cssInline', done => {
-	var YOUR_LOCALS = {};
-
 	gulp.src(carpeta.pug.pub + '/*.html')
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
 		.pipe(plumber())
@@ -297,7 +294,7 @@ gulp.task('compress', done => {
 		.pipe(changed(carpeta.js.pub, {extension: '.js'}))
 
 		.pipe(babel({
-			presets: ['env']
+			presets: ['@babel/preset-env']
 		}))
 
 		// COMPRIME EL JAVASCRIPT
