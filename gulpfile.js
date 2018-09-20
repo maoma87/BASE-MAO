@@ -61,6 +61,7 @@ var carpeta = {
 	}
 };
 
+var webpackConfig = require('./webpack.config.js')
 
 // TASKS ------------------------------------------------------------------
 
@@ -69,7 +70,7 @@ gulp.task('vue', done => {
 	gulp.src(carpeta.vue.file)
 		.pipe(plumber())
 
-		.pipe(webpack(require('./webpack.config.js')))
+		.pipe(webpack(webpackConfig))
 		
 		.pipe(gulp.dest(carpeta.vue.pub))
 		
@@ -80,6 +81,19 @@ gulp.task('vue', done => {
 		.pipe(browserSync.reload({
 			stream: true
 		}));
+	done()
+});
+
+// COMPILAR VUE PRODUCTION MODE
+gulp.task('vue-final', done => {
+	webpackConfig.mode = "production"
+	gulp.src(carpeta.vue.file)
+		.pipe(webpack(webpackConfig))
+
+		.pipe(gulp.dest(carpeta.vue.pub))
+		
+		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
+		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 	done()
 });
 
