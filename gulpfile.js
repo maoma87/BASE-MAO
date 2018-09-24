@@ -1,29 +1,29 @@
-var	gulp							= require('gulp'),
-		plumber						= require('gulp-plumber'),
-		browserSync				= require('browser-sync').create(),
-		notify						= require('gulp-notify'),
-		pug								= require('gulp-pug'),
-		inlineCss 				= require('gulp-inline-css'),
-		changed						= require('gulp-changed'),
-		prettify					= require('gulp-prettify'),
-		sass							= require('gulp-sass'),
-		sourcemaps				= require('gulp-sourcemaps'),
-		stripCssComments	= require('gulp-strip-css-comments'),
-		autoprefixer			= require('gulp-autoprefixer'),
-		csso							= require('gulp-csso'),
-		cssnano						= require('gulp-cssnano'),
-		cachebust					= require('gulp-cache-bust'),
-		concat						= require('gulp-concat'),
-		babel							= require('gulp-babel'),
-		uglify						= require('gulp-uglify'),
-		imagemin					= require('gulp-imagemin'),
-		webpack 					= require('webpack-stream')
+const	gulp							= require('gulp'),
+			plumber						= require('gulp-plumber'),
+			browserSync				= require('browser-sync').create(),
+			notify						= require('gulp-notify'),
+			pug								= require('gulp-pug'),
+			inlineCss 				= require('gulp-inline-css'),
+			changed						= require('gulp-changed'),
+			prettify					= require('gulp-prettify'),
+			sass							= require('gulp-sass'),
+			sourcemaps				= require('gulp-sourcemaps'),
+			stripCssComments	= require('gulp-strip-css-comments'),
+			autoprefixer			= require('gulp-autoprefixer'),
+			csso							= require('gulp-csso'),
+			cssnano						= require('gulp-cssnano'),
+			cachebust					= require('gulp-cache-bust'),
+			concat						= require('gulp-concat'),
+			babel							= require('gulp-babel'),
+			uglify						= require('gulp-uglify'),
+			imagemin					= require('gulp-imagemin'),
+			webpack 					= require('webpack-stream')
 
-var src = './source', // -> Desarrollo
-	pub = './public'; // -> Producción
+const src = './source', // -> Desarrollo
+			pub = './public'; // -> Producción
 
 // VARIABLES
-var carpeta = {
+const carpeta = {
 
 	pug:{
 		src		: src + '/*.pug',
@@ -61,7 +61,7 @@ var carpeta = {
 	}
 };
 
-var webpackConfig = require('./webpack.config.js')
+const webpackConfig = require('./webpack.config.js')
 
 // TASKS ------------------------------------------------------------------
 
@@ -78,9 +78,8 @@ gulp.task('vue', done => {
 		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(browserSync.stream());
+
 	done()
 });
 
@@ -123,9 +122,7 @@ gulp.task('pug', done => {
 		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(browserSync.stream());
 
 	done()
 });
@@ -153,9 +150,7 @@ gulp.task('pugIncludes', done => {
 		.pipe( notify("PUG COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		// .pipe(browserSync.stream());
 
 	done()
 });
@@ -180,9 +175,7 @@ gulp.task('pugFinal', done => {
 		.pipe( notify("PUG FINAL COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		// .pipe(browserSync.stream());
 
 	done()
 });
@@ -226,9 +219,7 @@ gulp.task('cssInline', done => {
 		.pipe( notify("PUG INLINE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		// .pipe(browserSync.stream());
 
 	done()
 });
@@ -255,9 +246,7 @@ gulp.task('sass', done => {
 		.pipe( notify("SASS COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(browserSync.stream());
 
 	done()
 });
@@ -324,9 +313,7 @@ gulp.task('compress', done => {
 		.pipe( notify("FUNCIONES .JS COMPRIMIDO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(browserSync.stream());
 
 	done()
 });
@@ -350,9 +337,7 @@ gulp.task('concat', done => {
 		.pipe( notify("PLUG-INS .JS CONCATENADOS: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		// .pipe(browserSync.stream());
 
 	done()
 });
