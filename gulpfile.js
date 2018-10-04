@@ -377,5 +377,7 @@ gulp.task('watch', done => {
 	done()
 });
 
+gulp.task('first', gulp.parallel('pug', 'sass', 'compress', 'vue'));
+
 // DEFAULT
-gulp.task('default', gulp.parallel('servidor','watch'));
+gulp.task('default', gulp.parallel('servidor', 'watch'));
