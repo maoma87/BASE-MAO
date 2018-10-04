@@ -1,7 +1,6 @@
 const	gulp							= require('gulp'),
 			plumber						= require('gulp-plumber'),
 			browserSync				= require('browser-sync').create(),
-			notify						= require('gulp-notify'),
 			pug								= require('gulp-pug'),
 			inlineCss 				= require('gulp-inline-css'),
 			changed						= require('gulp-changed'),
@@ -73,9 +72,6 @@ gulp.task('vue', done => {
 		.pipe(webpack(webpackConfig))
 		
 		.pipe(gulp.dest(carpeta.vue.pub))
-		
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
@@ -90,9 +86,6 @@ gulp.task('vue-final', done => {
 		.pipe(webpack(webpackConfig))
 
 		.pipe(gulp.dest(carpeta.vue.pub))
-		
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe(notify("VUE COMPILADO: <%= file.relative %>"))
 	done()
 });
 
@@ -117,9 +110,6 @@ gulp.task('pug', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// NOTIFICA QUE EL ARCHIVO .JADE SE COMPILO
-		.pipe(notify("JADE COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
@@ -146,9 +136,6 @@ gulp.task('pugIncludes', done => {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 
-		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
-		.pipe( notify("PUG COMPILADO: <%= file.relative %>"))
-
 		// REFRESCADO DEL NAVEGADOR
 		// .pipe(browserSync.stream());
 
@@ -170,9 +157,6 @@ gulp.task('pugFinal', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
-		.pipe( notify("PUG FINAL COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		// .pipe(browserSync.stream());
@@ -215,9 +199,6 @@ gulp.task('cssInline', done => {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 
-		// NOTIFICA QUE EL ARCHIVO .PUG SE COMPILO
-		.pipe( notify("PUG INLINE COMPILADO: <%= file.relative %>"))
-
 		// REFRESCADO DEL NAVEGADOR
 		// .pipe(browserSync.stream());
 
@@ -241,9 +222,6 @@ gulp.task('sass', done => {
 
 		// GUARDA EL ARCHIVO CSS
 		.pipe(gulp.dest(carpeta.css.pub))
-
-		// GENERA NOTIFICACION AL COMPILAR EL SASS
-		.pipe( notify("SASS COMPILADO: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
@@ -309,9 +287,6 @@ gulp.task('compress', done => {
 		// GUARDA EL ARCHIVO
 		.pipe(gulp.dest(carpeta.js.pub))
 
-		// NOTIFICA QUE EL ARCHIVO SE COMPRIMIO
-		.pipe( notify("FUNCIONES .JS COMPRIMIDO: <%= file.relative %>"))
-
 		// REFRESCADO DEL NAVEGADOR
 		.pipe(browserSync.stream());
 
@@ -332,9 +307,6 @@ gulp.task('concat', done => {
 
 		// GUARDA EL ARCHIVO SCRIPTS.JS
 		.pipe(gulp.dest(carpeta.js.pub))
-
-		// NOTIFICA QUE EL ARCHIVO SE CONCATENO
-		.pipe( notify("PLUG-INS .JS CONCATENADOS: <%= file.relative %>"))
 
 		// REFRESCADO DEL NAVEGADOR
 		// .pipe(browserSync.stream());
