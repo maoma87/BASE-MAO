@@ -53,3 +53,19 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+\.idea/base-mao\.iml
+
+\.idea/dictionaries/mauri\.xml
+
+\.idea/encodings\.xml
+
+\.idea/inspectionProfiles/Project_Default\.xml
+
+\.idea/misc\.xml
+
+\.idea/modules\.xml
+
+\.idea/vcs\.xml
+
+\.idea/workspace\.xml
