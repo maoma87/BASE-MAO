@@ -91,7 +91,7 @@ gulp.task('vue-final', done => {
 
 // COMPILAR PUG
 gulp.task('pug', done => {
-	var YOUR_LOCALS = {};
+	let YOUR_LOCALS = {};
 
 	gulp.src([carpeta.pug.src , '!' + carpeta.pug.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -119,7 +119,7 @@ gulp.task('pug', done => {
 
 // COMPILAR PUG DE INCLUDES
 gulp.task('pugIncludes', done => {
-	var YOUR_LOCALS = {};
+	let YOUR_LOCALS = {};
 
 	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -137,14 +137,14 @@ gulp.task('pugIncludes', done => {
 		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
+		.pipe(browserSync.stream());
 
 	done()
 });
 
 // COMPILAR PUG EN LINEA
 gulp.task('pugFinal', done => {
-	var YOUR_LOCALS = {};
+	let YOUR_LOCALS = {};
 
 	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -157,9 +157,6 @@ gulp.task('pugFinal', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
 
 	done()
 });
@@ -198,9 +195,6 @@ gulp.task('cssInline', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
 
 	done()
 });
@@ -377,7 +371,7 @@ gulp.task('watch', done => {
 	done()
 });
 
-gulp.task('first', gulp.parallel('pug', 'sass', 'compress', 'vue'));
+gulp.task('first', gulp.parallel('pug', 'sass', 'json', 'compress', 'vue'));
 
 // DEFAULT
 gulp.task('default', gulp.parallel('servidor', 'watch'));
