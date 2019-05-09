@@ -15,7 +15,6 @@ const	gulp							= require('gulp'),
 			concat						= require('gulp-concat'),
 			babel							= require('gulp-babel'),
 			uglify						= require('gulp-uglify'),
-			imagemin					= require('gulp-imagemin'),
 			webpack 					= require('webpack-stream')
 
 const src = './source', // -> Desarrollo
@@ -23,40 +22,30 @@ const src = './source', // -> Desarrollo
 
 // VARIABLES
 const carpeta = {
-
 	pug:{
 		src		: src + '/*.pug',
 		inc		: src + '/_includes/pug/**/*.pug',
 		pub		: pub + '/'
 	},
-
 	css: {
 		src		: src + '/css/*.{scss,sass}',
 		inc		: src + '/_includes/sass/**/*.{scss,sass}',
 		pub		: pub + '/css'
 	},
-
 	js: {
 		src		: src + '/js/*.js',
 		inc		: src + '/_includes/js/**/*.js',
 		pub		: pub + '/js'
 	},
-
 	vue: {
 		file	: src + '/app/app.js',
 		src		: src + '/app/**/*.js',
 		inc		: src + '/app/**/*.vue',
 		pub		: pub + '/js'
 	},
-
 	json: {
 		src		: src + '/json/*.json',
 		pub		: pub + '/json'
-	},
-
-	img: {
-		src		: src + '/img/**/*.{jpg,jpeg,png,gif,svg,JPG,JPEG}',
-		pub		: pub + '/img'
 	}
 };
 
@@ -80,7 +69,7 @@ gulp.task('vue', done => {
 });
 
 // COMPILAR VUE PRODUCTION MODE
-gulp.task('vue-final', done => {
+gulp.task('vueFinal', done => {
 	webpackConfig.mode = "production"
 	gulp.src(carpeta.vue.file)
 		.pipe(webpack(webpackConfig))
@@ -135,10 +124,6 @@ gulp.task('pugIncludes', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
-
 	done()
 });
 
@@ -157,10 +142,6 @@ gulp.task('pugFinal', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
-
 	done()
 });
 
@@ -176,7 +157,6 @@ gulp.task('cacheBust', done => {
 		}))
 
 		.pipe(gulp.dest(carpeta.pug.pub));
-
 	done()
 });
 
@@ -198,10 +178,6 @@ gulp.task('cssInline', done => {
 
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
-
 	done()
 });
 
@@ -251,13 +227,7 @@ gulp.task('sassFinal', done => {
 
 		// MINIFICAR EL CSS
 		.pipe(cssnano())
-
-		// ORDENADO DEL CSS
-		// .pipe(cssbeautify({
-		// 	indent: '	',
-		// 	autosemicolon: true
-		// }))
-
+		
 		// GUARDA EL ARCHIVO CSS
 		.pipe(gulp.dest(carpeta.css.pub));
 
@@ -307,20 +277,6 @@ gulp.task('concat', done => {
 
 		// GUARDA EL ARCHIVO SCRIPTS.JS
 		.pipe(gulp.dest(carpeta.js.pub))
-
-		// REFRESCADO DEL NAVEGADOR
-		// .pipe(browserSync.stream());
-
-	done()
-});
-
-// COMPRESION DE IMAGENES
-gulp.task('img', done => {
-	gulp.src(carpeta.img.src)
-		.pipe(imagemin({
-			progressive: true
-		}))
-		.pipe(gulp.dest(carpeta.img.pub));
 
 	done()
 });

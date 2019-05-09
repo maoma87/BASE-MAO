@@ -8,9 +8,13 @@
 <script>
 export default {
 	name: "vcomponent",
-	data(){
-		return{
-		}
+	async mounted(){
+		try {
+			const data = await this.axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
+			console.log(data)
+		} catch(error) {
+			console.log("error", error)
+  	}
 	}
 }
 </script>
