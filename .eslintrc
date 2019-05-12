@@ -4,19 +4,37 @@
 		"commonjs": true,
 		"es6": true
 	},
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/essential"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
 	"parserOptions": {
-		"ecmaVersion": 2015,
+		"ecmaVersion": 2018,
 		"sourceType": "module"
 	},
+	"plugins": [
+		"vue"
+	],
 	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
 		"linebreak-style": [
 			"error",
 			"windows"
 		],
+		"semi": [
+			"error",
+			"never"
+		],
 		"no-console": [
 			"error",
-			{ 
+			{
 				"allow": [
 					"warn",
 					"error",

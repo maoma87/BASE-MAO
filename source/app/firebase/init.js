@@ -4,12 +4,12 @@ import "firebase/auth"
 import "firebase/storage"
 
 const firebaseApp = firebase.initializeApp({
-    apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    authDomain: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    databaseURL: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    projectId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    storageBucket: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    messagingSenderId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	authDomain: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	databaseURL: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	projectId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	storageBucket: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	messagingSenderId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 })
 
 const db = firebaseApp.firestore()
