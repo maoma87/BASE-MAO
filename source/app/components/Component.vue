@@ -9,12 +9,16 @@
 export default {
 	name: "vcomponent",
 	async mounted(){
-		try {
-			const data = await this.axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
-			console.log(data)
-		} catch(error) {
-			console.log("error", error)
-  	}
+		// const call = await this.axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
+		// console.log(this.fb)
+
+		// this.fb.db.collection("people").get()
+		// 	.then( querySnapshot => {
+		// 		console.log(querySnapshot)
+		// 		querySnapshot.forEach( doc => {
+		// 			console.log(doc.id,doc.data())
+		// 		})
+		// 	})
 	}
 }
 </script>

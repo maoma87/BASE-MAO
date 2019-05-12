@@ -1,14 +1,19 @@
-const config = {
-    apiKey: "XXXXXXXXXXXXXXXXX",
-    authDomain: "XXXXXXXXXXXXXXXXX",
-    databaseURL: "XXXXXXXXXXXXXXXXX",
-    projectId: "XXXXXXXXXXXXXXXXX",
-    storageBucket: "XXXXXXXXXXXXXXXXX",
-    messagingSenderId: "XXXXXXXXXXXXXXXXX" 
-};
+import firebase from 'firebase/app'
+import "firebase/firestore"
+import "firebase/auth"
+import "firebase/storage"
 
-const firebaseApp = firebase.initializeApp(config);
+const firebaseApp = firebase.initializeApp({
+    apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    authDomain: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    databaseURL: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    projectId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    storageBucket: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    messagingSenderId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+})
 
-firebaseApp.firestore().settings({timestampsInSnapshots:true});
+const db = firebaseApp.firestore()
+const auth = firebaseApp.auth()
+const storage = firebaseApp.storage()
 
-export default firebaseApp.firestore();
+export {db,auth,storage}
