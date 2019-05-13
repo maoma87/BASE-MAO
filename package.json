@@ -10,7 +10,7 @@
 	"readme": "../README.md",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint --ext .js,.vue ./source"
+		"lint": "./node_modules/.bin/eslint --ext .js,.vue ./source"
 	},
 	"devDependencies": {
 		"@babel/core": "7.4.4",

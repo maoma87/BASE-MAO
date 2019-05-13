@@ -1,96 +1,99 @@
 # BASE-MAO
 
-Mao's own boilerplate to work with PUG, SASS and VUE
+Mao's own boilerplate to work with VUE, PUG and SASS 
 
 ## Structure
 
-* HTML
+* STATIC
 	* PUG
-* CSS
 	* SASS
-		* Bourbon
+		* Bourbon 
 		* Bootstrap
-		
+	* BABEL
+		* JavaScript
+___
 
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+* VUE v2.6.10
+	* Template
+		* HTML
+		* PUG
+	* Script
+		* JavaScript
+	* Style
+		* CSS
+		* SASS
+___
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+1. [Node.js](https://nodejs.org/es/) 
+2. [Yarn](https://yarnpkg.com/en/docs/install#windows-stable)
+3. Gulp-cli - ``yarn global add gulp-cli``
+___
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+```
+$ yarn install
+```
+___
 
-Say what the step will be
+### First Step
 
 ```
-Give the example
+$ gulp first
 ```
+This creates the folder structure
+___
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+### Start working
 
 ```
-Give an example
+$ gulp
 ```
+This will setup the LocalHost server [http://localhost:3000/](http://localhost:3000/)
+___
 
-### And coding style tests
+## Other gulp tasks
 
-Explain what these tests test and why
+``gulp vue`` : compile vue app in development mode
+
+``gulp vueFinal`` : compile vue in production mode
+
+``gulp pug`` : compile the pug files in the source folder in development mode
+
+``gulp pugFinal`` : compile the pug files in the source folder in production mode
+
+``gulp cssInline`` : Puts the css inline in the public html
+
+``gulp sass`` : compile the sass files in the sourece/css folder in development mode
+
+``gulp sassFinal`` : compile the sass files in the sourece/css folder in production mode
+
+``gulp compress`` : compile the js files in source/js with babel into the public/js folder
+
+``gulp concat`` : concatenate the files in the source/_includes/js folder into scripts.js in public/js 
+
+``gulp json`` : copy the json files form source/json to public/json
+
+___
+## Linting
 
 ```
-Give an example
+$ npm run lint
 ```
+Lint every .js and .vue file inside source
 
-## Deployment
+___
 
-Add additional notes about how to deploy this on a live system
+## Formating
 
-## Built With
+The formating is done by vsCode and the extention [ESlint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) on save
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+___ 
 
-## Contributing
+## Author
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+**Mao Santaella**
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+[GitHub](https://github.com/maoma87) - [Portfolio](https://mauriciosantaella.ninja)
