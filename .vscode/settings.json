@@ -1,0 +1,29 @@
+{
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": false,
+	"editor.codeLens": false,
+	"editor.detectIndentation": false,
+	"eslint.nodePath": "./node-modules",
+	"eslint.packageManager": "yarn",
+	"eslint.autoFixOnSave": true,
+	"[javascript]": {
+		"editor.formatOnSave": false,
+	},
+	"[vue]": {
+		"editor.formatOnSave": false,
+	},
+	"eslint.validate": [
+		{
+			"language": "vue",
+			"autoFix": true
+		},
+		{
+			"language": "html",
+			"autoFix": true
+		},
+		{
+			"language": "javascript",
+			"autoFix": true
+		}
+	]
+}

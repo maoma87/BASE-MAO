@@ -1,22 +1,22 @@
 <template lang="pug">
 	
-	.app
-		router-view
+.app
+	router-view
 
 </template>
 
 <script>
 
 export default {
-	name: 'app',
+	name: 'App',
 	components: {},
 	data(){
 		return{}
 	},
-	methods:{},
 	computed:{},
 	created(){},
-	mounted(){}
+	mounted(){},
+	methods:{},
 }
 </script>
 

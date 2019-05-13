@@ -1,24 +1,24 @@
 const	gulp							= require('gulp'),
-			plumber						= require('gulp-plumber'),
-			browserSync				= require('browser-sync').create(),
-			pug								= require('gulp-pug'),
-			inlineCss 				= require('gulp-inline-css'),
-			changed						= require('gulp-changed'),
-			prettify					= require('gulp-prettify'),
-			sass							= require('gulp-sass'),
-			sourcemaps				= require('gulp-sourcemaps'),
-			stripCssComments	= require('gulp-strip-css-comments'),
-			autoprefixer			= require('gulp-autoprefixer'),
-			csso							= require('gulp-csso'),
-			cssnano						= require('gulp-cssnano'),
-			cachebust					= require('gulp-cache-bust'),
-			concat						= require('gulp-concat'),
-			babel							= require('gulp-babel'),
-			uglify						= require('gulp-uglify'),
-			webpack 					= require('webpack-stream')
+	plumber						= require('gulp-plumber'),
+	browserSync				= require('browser-sync').create(),
+	pug								= require('gulp-pug'),
+	inlineCss 				= require('gulp-inline-css'),
+	changed						= require('gulp-changed'),
+	prettify					= require('gulp-prettify'),
+	sass							= require('gulp-sass'),
+	sourcemaps				= require('gulp-sourcemaps'),
+	stripCssComments	= require('gulp-strip-css-comments'),
+	autoprefixer			= require('gulp-autoprefixer'),
+	csso							= require('gulp-csso'),
+	cssnano						= require('gulp-cssnano'),
+	cachebust					= require('gulp-cache-bust'),
+	concat						= require('gulp-concat'),
+	babel							= require('gulp-babel'),
+	uglify						= require('gulp-uglify'),
+	webpack 					= require('webpack-stream')
 
 const src = './source', // -> Desarrollo
-			pub = './public'; // -> Producción
+	pub = './public' // -> Producción
 
 // VARIABLES
 const carpeta = {
@@ -47,7 +47,7 @@ const carpeta = {
 		src		: src + '/json/*.json',
 		pub		: pub + '/json'
 	}
-};
+}
 
 const webpackConfig = require('./webpack.config.js')
 
@@ -63,10 +63,10 @@ gulp.task('vue', done => {
 		.pipe(gulp.dest(carpeta.vue.pub))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 
 	done()
-});
+})
 
 // COMPILAR VUE PRODUCTION MODE
 gulp.task('vueFinal', done => {
@@ -76,11 +76,11 @@ gulp.task('vueFinal', done => {
 
 		.pipe(gulp.dest(carpeta.vue.pub))
 	done()
-});
+})
 
 // COMPILAR PUG
 gulp.task('pug', done => {
-	let YOUR_LOCALS = {};
+	let YOUR_LOCALS = {}
 
 	gulp.src([carpeta.pug.src , '!' + carpeta.pug.inc])
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -101,14 +101,14 @@ gulp.task('pug', done => {
 		.pipe(gulp.dest(carpeta.pug.pub))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 
 	done()
-});
+})
 
 // COMPILAR PUG DE INCLUDES
 gulp.task('pugIncludes', done => {
-	let YOUR_LOCALS = {};
+	let YOUR_LOCALS = {}
 
 	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -125,11 +125,11 @@ gulp.task('pugIncludes', done => {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 	done()
-});
+})
 
 // COMPILAR PUG EN LINEA
 gulp.task('pugFinal', done => {
-	let YOUR_LOCALS = {};
+	let YOUR_LOCALS = {}
 
 	gulp.src(carpeta.pug.src)
 		// PREVIENE QUE LOS PROCESOS GULP.WATCH SE DETENGA AL ENCONTRAR UN ERROR
@@ -143,7 +143,7 @@ gulp.task('pugFinal', done => {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 	done()
-});
+})
 
 // CACHE BUST
 gulp.task('cacheBust', done => {
@@ -156,9 +156,9 @@ gulp.task('cacheBust', done => {
 			type: 'timestamp'
 		}))
 
-		.pipe(gulp.dest(carpeta.pug.pub));
+		.pipe(gulp.dest(carpeta.pug.pub))
 	done()
-});
+})
 
 
 
@@ -179,7 +179,7 @@ gulp.task('cssInline', done => {
 		// GUARDA EL ARCHIVO HTML
 		.pipe(gulp.dest(carpeta.pug.pub))
 	done()
-});
+})
 
 // COMPILAR SASS
 gulp.task('sass', done => {
@@ -200,10 +200,10 @@ gulp.task('sass', done => {
 		.pipe(gulp.dest(carpeta.css.pub))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 
 	done()
-});
+})
 
 // COMPILAR SASS EN LINEA
 gulp.task('sassFinal', done => {
@@ -229,10 +229,10 @@ gulp.task('sassFinal', done => {
 		.pipe(cssnano())
 		
 		// GUARDA EL ARCHIVO CSS
-		.pipe(gulp.dest(carpeta.css.pub));
+		.pipe(gulp.dest(carpeta.css.pub))
 
 	done()
-});
+})
 
 
 // COMPRIME EL ARCHIVO DE FUNCIONES PRINCIPAL
@@ -258,10 +258,10 @@ gulp.task('compress', done => {
 		.pipe(gulp.dest(carpeta.js.pub))
 
 		// REFRESCADO DEL NAVEGADOR
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream())
 
 	done()
-});
+})
 
 // CONCATENA Y COMPRIME LOS ARCHIVOS JS EN LA CARPETA JS DE INCLUDES
 gulp.task('concat', done => {
@@ -279,16 +279,16 @@ gulp.task('concat', done => {
 		.pipe(gulp.dest(carpeta.js.pub))
 
 	done()
-});
+})
 
 // COPIA DE ARCHIVO JSON
 gulp.task('json', done => {
 	gulp.src(carpeta.json.src)
 		
-		.pipe(gulp.dest(carpeta.json.pub));
+		.pipe(gulp.dest(carpeta.json.pub))
 
 	done()
-});
+})
 
 
 // MONTAJE DEL SERVIDOR
@@ -298,42 +298,42 @@ gulp.task('servidor', done => {
 		// reloadDelay: 2000,
 		open: false,
 		notify: false
-	});
+	})
 
 	done()
-});
+})
 
 
 // WATCH
 gulp.task('watch', done => {
 
 	// VIGILA LOS ARCHIVOS PUG DENTRO DE _includes/pug para compilar a html
-	gulp.watch(carpeta.pug.inc , gulp.series('pugIncludes'));
+	gulp.watch(carpeta.pug.inc , gulp.series('pugIncludes'))
 	// VIGILA LOS ARCHIVOS PUG DENTRO DE root para compilar a html
-	gulp.watch(carpeta.pug.src , gulp.series('pug'));
+	gulp.watch(carpeta.pug.src , gulp.series('pug'))
 
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE _includes/sass para compilar main.sass
-	gulp.watch(carpeta.css.inc , gulp.series('sass'));
+	gulp.watch(carpeta.css.inc , gulp.series('sass'))
 	// VIGILA LOS ARCHIVOS SASS DENTRO DE css para compilar main.sass
-	gulp.watch(carpeta.css.src , gulp.series('sass'));
+	gulp.watch(carpeta.css.src , gulp.series('sass'))
 
 	// Vigila los cambios en los archivos .js de la carpeta js
-	gulp.watch(carpeta.js.src , gulp.series('compress'));
+	gulp.watch(carpeta.js.src , gulp.series('compress'))
 	// Vigila los cambios en los archivos .js de los includes
 	// gulp.watch(carpeta.js.inc , gulp.series('concat'));
 
 	// VIGILA LOS ARCHIVOS .VUE DENTRO DE app
-	gulp.watch(carpeta.vue.inc , gulp.series('vue'));
+	gulp.watch(carpeta.vue.inc , gulp.series('vue'))
 	// VIGILA LOS ARCHIVOS JS DENTRO DE app
-	gulp.watch(carpeta.vue.src, gulp.series('vue'));
+	gulp.watch(carpeta.vue.src, gulp.series('vue'))
 
 	// VIGILA LOS ARCHIVOS JSON
-	gulp.watch(carpeta.json.src, gulp.series('json'));
+	gulp.watch(carpeta.json.src, gulp.series('json'))
 
 	done()
-});
+})
 
-gulp.task('first', gulp.parallel('pug', 'sass', 'json', 'compress', 'vue'));
+gulp.task('first', gulp.parallel('pug', 'sass', 'json', 'compress', 'vue'))
 
 // DEFAULT
-gulp.task('default', gulp.parallel('servidor', 'watch'));
+gulp.task('default', gulp.parallel('servidor', 'watch'))

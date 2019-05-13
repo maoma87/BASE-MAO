@@ -13,8 +13,8 @@ export const store = new Vuex.Store({
 		},
 	},
 	actions: {
-		getData: context => {
-			// a-sinc functions
+		getData: ({ commit },val) => {
+			commit("storeExampleData",val)
 		}
 	},
 	getters: {

@@ -1,13 +1,13 @@
 <template lang="pug">
 
-	#vcomponent
-		h1 Hola Mao
+#vcomponent
+	h1 Hola Mao
 
 </template>
 
 <script>
 export default {
-	name: "vcomponent",
+	name: "Vcomponent",
 	async mounted(){
 		// const call = await this.axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
 		// console.log(this.fb)

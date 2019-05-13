@@ -1,40 +1,34 @@
 <template lang="pug">
 
-	#home
-		vcomponent
+#home
+	vcomponent
 
 </template>
 
 <script>
-import vcomponent from '../components/Component.vue'
+import vcomponent from "../components/Component.vue"
 // SI SE VAN A COMENTAR LOS IMPORTS SE TIENEN QUE PONER DEBAJO DE LOS QUE NO ESTAN COMENTADOS
 // import db from '../firebase/init'
 // import axios from 'axios'
 
 export default {
-	name: 'home',
+	name: "Home",
 
 	components: {
-		vcomponent,
+		vcomponent
 	},
 
-	data(){
-		return{
-		}
+	data() {
+		return {}
 	},
 
-	methods:{
-	},
-	
-	computed:{
-	},
+	computed: {},
 
-	created(){
-	},
+	created() {},
 
-	mounted(){
-	}
+	mounted() {},
 
+	methods: {}
 }
 </script>
 
