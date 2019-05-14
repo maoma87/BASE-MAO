@@ -1,6 +1,5 @@
 {
 	"editor.formatOnSave": true,
-	"editor.insertSpaces": false,
 	"editor.codeLens": false,
 	"editor.detectIndentation": false,
 	"eslint.nodePath": "./node-modules",
@@ -25,5 +24,8 @@
 			"language": "javascript",
 			"autoFix": true
 		}
-	]
+  ],
+	"editor.insertSpaces": false,
+	"editor.tabSize": 2,
+	"vetur.format.options.useTabs": true
 }
