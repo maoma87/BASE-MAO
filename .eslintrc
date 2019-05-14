@@ -1,0 +1,28 @@
+{
+	"env": {
+		"node": true,
+		"browser": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/recommended"
+	],
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"semi": [
+			"error",
+			"never"
+		],
+		"no-var": 2,
+		"eqeqeq": 2,
+		"no-debugger": 2
+	}
+}
