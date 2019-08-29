@@ -23,6 +23,7 @@
 		],
 		"no-var": 2,
 		"eqeqeq": 2,
-		"no-debugger": 2
+		"no-debugger": 2,
+		"vue/order-in-components": 0
 	}
 }
