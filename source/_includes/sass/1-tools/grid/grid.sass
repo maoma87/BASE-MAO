@@ -1,0 +1,89 @@
+$breackpoints: (xs 320px , sm 480px, md 768px, lg 990px, xl 1200px)
+$columns: 12
+$gutter: 15px
+
+
+.container-fluid
+	width: 100%
+	padding-right: $gutter
+	padding-left: $gutter
+
+.container
+	@extend .container-fluid
+	margin-right: auto
+	margin-left: auto
+
+.row
+	display: flex
+	flex-wrap: wrap
+	margin-right: -$gutter
+	margin-left: -$gutter
+
+	&+.row
+		margin-top: $gutter
+
+.no-gutters
+	margin-right: 0
+	margin-left: 0
+	&>.col, &>[class*=col-]
+		padding-right: 0
+		padding-left: 0
+
+%col
+	position: relative
+	width: 100%
+	padding-right: $gutter
+	padding-left: $gutter
+
+.col
+	@extend %col
+
+.col-auto
+	flex: 0 0 auto
+	width: auto
+	max-width: 100%
+
+@for $i from -1 through $columns +1
+
+	@if $i == -1
+		.order-first
+			order: $i
+	@else if $i == 0
+		.order-#{$i}
+			order: $i
+	@else if $i > $columns
+		.order-last
+			order: $i
+	@else
+		.col-#{$i}
+			@extend %col
+			flex: 0 0 percentage($i/$columns)
+			max-width: percentage($i/$columns)
+		.order-#{$i}
+			order: $i
+		.offset-#{$i}
+			margin-left: percentage($i/$columns)
+
+
+@each $breackpoint,$value in $breackpoints
+	@for $i from 1 through $columns`
+		.col-#{$breackpoint}-#{$i}
+			@extend %col
+
+
+	@media screen and (min-width: $value)
+		.container
+			max-width: $value
+		.col-#{$breackpoint}
+			flex-basis: 0
+			flex-grow: 1
+			max-width: 100%
+		.col-#{$breackpoint}-auto
+			flex: 0 0 auto
+			width: auto
+			max-width: 100%
+		@for $i from 1 through $columns
+			.col-#{$breackpoint}-#{$i}
+				flex: 0 0 percentage($i/$columns)
+				max-width: percentage($i/$columns)
+
